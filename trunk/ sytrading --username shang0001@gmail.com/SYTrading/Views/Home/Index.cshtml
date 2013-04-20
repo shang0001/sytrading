@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h1>@ViewBag.Title.</h1>
+                <h2>@ViewBag.Message</h2>
+            </hgroup>
+            <p>
+                To start, choose "Gloves", "Materials" or "Applications" on the right top.
+            </p>
+        </div>
+    </section>
+}
+<h3>We suggest the following:</h3>
+<ol class="round">
+    <li class="one">
+        <h5>添加材料</h5>
+        每一款手套由一种材料制作，材料在 @Html.ActionLink("Materials", "Index", "Material") 添加
+    </li>
+
+    <li class="two">
+        <h5>添加用途</h5>
+        每一款手套可以有多种用途，用途在 @Html.ActionLink("Applications", "Index", "Application") 添加
+    </li>
+
+    <li class="three">
+        <h5>添加手套款式</h5>
+        每一款手套包括型号，名称，材料，尺寸和用途，手套款式在 @Html.ActionLink("Gloves", "Index", "Glove") 添加
+    </li>
+</ol>

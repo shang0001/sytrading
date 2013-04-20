@@ -1,0 +1,80 @@
+﻿@model SYTrading.Models.Glove
+
+@{
+    ViewBag.Title = "Glove Details";
+}
+
+<h2>Glove Details</h2>
+
+<div class="data-fields">
+<fieldset>
+    <legend>Glove</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ItemNo)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ItemNo)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Description)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Description)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Sizes)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Sizes)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Colors)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Colors)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Material.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Material.Name)
+    </div>
+
+    <div class="display-field">
+        <table>
+            <tr>
+                <th>Applications</th>
+            </tr>
+            @foreach (var item in Model.GloveApplications)
+            {
+                <tr>
+                    <td>
+                        * @Html.DisplayFor(modelItem => item.Application.Name)
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</fieldset>
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.GloveID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+</div>
+
+<div class="upload-partialview">
+    @Html.Partial("../Upload/Upload")
+</div>
