@@ -294,6 +294,28 @@ namespace SYTrading.Controllers
                 context.Response.StatusCode = 404;
         }
 
+        //
+        // POST: /Glove/Release/
+
+        [HttpPost, ActionName("Release")]
+        public ActionResult ReleaseConfirmed(int[] ids)
+        {
+            DbSet<Glove> gloves = db.Gloves;
+            foreach (Glove glove in gloves)
+            {
+                if (ids.Contains(glove.GloveID))
+                {
+                    glove.Released = true;
+                }
+                else
+                {
+                    glove.Released = false;
+                }
+            }
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
         private string StorageRoot
         {
             get { return Path.Combine(Server.MapPath("~/Upload/UploadedFiles/")); }

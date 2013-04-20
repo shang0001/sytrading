@@ -46,6 +46,8 @@ namespace SYTrading.Models
         [MaxLength(200, ErrorMessage = "Colors cannot be longer than 200 characters.")]
         public string Colors { get; set; }
 
+        public bool Released { get; set; }
+
         [Required(ErrorMessage = "Material is required.")]
         public int MaterialID { get; set; }
         public virtual Material Material { get; set; }
@@ -68,7 +70,7 @@ namespace SYTrading.Models
         public int MaterialID { get; set; }
 
         [Required(ErrorMessage = "Material Name is required.")]
-        [Display(Name = "Material Name")]
+        [Display(Name = "Material")]
         [MaxLength(100, ErrorMessage = "Material Name cannot be longer than 100 characters.")]
         public string Name { get; set; }
         public string Description { get; set; }
