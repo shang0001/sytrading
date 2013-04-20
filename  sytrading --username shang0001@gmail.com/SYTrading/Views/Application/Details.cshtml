@@ -1,0 +1,29 @@
+﻿@model SYTrading.Models.Application
+
+@{
+    ViewBag.Title = "Application Details";
+}
+
+<h2>Application Details</h2>
+
+<fieldset>
+    <legend>Application</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Category)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Category)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ApplicationID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,104 @@
+﻿@model SYTrading.ViewModels.GloveViewData
+
+@{
+    ViewBag.Title = "Edit Glove";
+}
+
+<h2>Edit Glove</h2>
+
+<div class="data-fields">
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Glove</legend>
+
+        @Html.HiddenFor(model => model.Glove.GloveID)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Glove.ItemNo)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Glove.ItemNo)
+            @Html.ValidationMessageFor(model => model.Glove.ItemNo)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Glove.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Glove.Name)
+            @Html.ValidationMessageFor(model => model.Glove.Name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Glove.Description)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Glove.Description)
+            @Html.ValidationMessageFor(model => model.Glove.Description)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Glove.Sizes)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Glove.Sizes)
+            @Html.ValidationMessageFor(model => model.Glove.Sizes)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Glove.Colors)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Glove.Colors)
+            @Html.ValidationMessageFor(model => model.Glove.Colors)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Glove.MaterialID, "Material")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.Glove.MaterialID, Model.MaterialID)
+            @Html.ValidationMessageFor(model => model.Glove.MaterialID)
+        </div>
+
+        <br />
+        <div class="editor-label">
+            @Html.Label("Applications")
+        </div>
+        <div class="editor-field">
+            <ul class="applicationsList">
+                @foreach (var application in Model.Applications) {
+                    @: <li> 
+                        <input type="checkbox" 
+                                name="selectedApplications" 
+                                value="@application.ApplicationID"
+                           @(Html.Raw(Model.Glove.GloveApplications.Select(c => c.ApplicationID).Contains(application.ApplicationID) ? "checked=\"checked\"" : "")) />
+                        @application.Name
+                    @:</li>
+                }
+            </ul>
+        </div>
+
+        @Html.Hidden("imageFileNames",  String.Join(";", Model.Glove.Images.Select(c => Path.GetFileName(c.Path))))
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+</div>
+
+<div class="upload-partialview">
+    @Html.Partial("../Upload/Upload", Model.Glove)
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,318 @@
+﻿@model SYTrading.Models.Glove
+
+@Scripts.Render("~/bundles/uploadJS")
+@Styles.Render("~/Content/uploadCss")
+
+@if (HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString() != "Details")
+{
+<!-- Start File Upload Containers -->
+<div class="upload-buttons">
+<span class="add-button">
+    <img src="~/Images/add-32.png" />
+    <span>Add images...</span>
+    <input id="fileupload" type="file" name="files[]" data-url="/Upload/Upload" multiple>
+</span> 
+<span class="delete-button">
+    <img src="~/Images/delete-32.png" />
+    <span>Delete the selected image...</span>
+</span>
+</div>  
+<div id="progress" style="width:300px">
+    <div id="progressbar"></div>
+    <div id="result"></div>
+</div>
+}
+
+<!-- Start Advanced Gallery Html Containers -->
+<div id="gallery" class="content">
+	<div id="controls" class="controls"></div>
+	<div class="slideshow-container">
+		<div id="loading" class="loader"></div>
+		<div id="slideshow" class="slideshow"></div>
+		<div id="caption" class="caption-container"></div>
+	</div>
+	<div id="captionToggle">
+		<a href="#toggleCaption" class="off" title="Show Caption">Show Caption</a>
+	</div>
+</div>
+<div id="thumbs" class="navigation">
+    <ul class="thumbs noscript">
+        @if (Model.Images != null)
+        {
+            foreach (var item in Model.Images)
+            {
+                <li>
+                    <a class="thumb" name="optionalCustomIdentifier" href="@item.Path" title="@Path.GetFileNameWithoutExtension(item.Path).Substring(Path.GetFileNameWithoutExtension(item.Path).LastIndexOf("_") + 1)">
+                        <img src="data:image/png;base64,@item.ThumbnailString" alt="your image title again for graceful degradation" />
+                    </a>
+                    <div class="caption">
+                        <div class="download">																					
+							<a href="@item.Path">Download Original</a>                                            		
+						</div>																									
+						<div class="image-title">Dynamically Added Image</div>													
+						<div class="image-desc">																				
+							Description	                                                                            			
+						</div>
+                    </div>
+                </li>
+            }
+        }
+@*        <li>
+            <a class="thumb" name="optionalCustomIdentifier" href="~/Images/Gloves/2083503622_5b17f16a60.jpg" title="your image title">
+                <img src="" alt="your image title again for graceful degradation" />
+            </a>
+            <div class="caption">
+                (Any html can go here)
+            </div>
+        </li>
+        <li>
+            <a class="thumb" name="optionalCustomIdentifier" href="~/Images/Gloves/2083508720_fa906f685e.jpg" title="your image title">
+                <img src="" alt="your image title again for graceful degradation" />
+            </a>
+            <div class="caption">
+                (Any html can go here)
+            </div>
+        </li>
+        <li>
+            <a class="thumb" name="optionalCustomIdentifier" href="~/Images/Gloves/2538163540_c2026243d2.jpg" title="your image title">
+                <img src="" alt="your image title again for graceful degradation" />
+            </a>
+            <div class="caption">
+                (Any html can go here)
+            </div>
+        </li>*@
+    </ul>
+</div> 
+<script>
+    $(function () {
+        // We only want these styles applied when javascript is enabled
+        $('div.navigation').css({ 'width': '50px', 'float': 'left' });
+        $('div.content').css('display', 'block');
+
+        var gallery = null;
+        if (($(".thumbs").has("li").length) > 0) {
+            gallery = initializeGallary();
+        }
+        else {
+            $(".thumbs").html("<li>No Images</li>");
+            $("#gallery").hide();
+        }
+        /****************************************************************************************/
+
+        /***************** Attach click event to the Remove Image By Index Link *****************/
+
+        $('.delete-button').click(function (e) {
+            // Before delete, determine the next image first. If none, -1.
+            var nextIndex = 0;
+
+            if (gallery.getNextIndex(gallery.currentImage.index) == 0) {
+                nextIndex = gallery.currentImage.index - 1;
+            }
+            else {
+                nextIndex = gallery.currentImage.index;
+            }
+
+            // Synchronize the image file names stored for model
+            var filename = decodeURI(gallery.currentImage.image.nameProp)
+            var existing = $("#imageFileNames").val();
+            $("#imageFileNames").val(existing.replace(new RegExp(filename + ';?'), ""));
+            //alert($("#imageFileNames").val());
+
+            if (!gallery.removeImageByIndex(gallery.currentImage.index))
+                alert('There is no longer an image to remove!');
+
+            e.preventDefault();
+
+            // After delete, go the pre-determined image.
+            if (nextIndex >= 0) {
+                gallery.gotoIndex(nextIndex, true, true);
+            }
+            else {
+                $("#gallery").hide();
+            }
+        });
+
+        /****************************************************************************************/
+
+
+        $('#fileupload').fileupload({
+            dataType: 'json',
+            add: function (e, data) {
+                var id = -1;
+                if ( $("#Glove_GloveID").is( "*" ) ) {
+                    id = $("#Glove_GloveID").val();
+                }
+                data.formData = { id: id };
+
+                // Check dup files
+                var filename = data.files[0].name;
+                var existingFileNames = $("#imageFileNames").val().split(";");
+                for (var i = 0; i < existingFileNames.length; i++) {
+                    if (existingFileNames[i] == (id + "_" + filename) || existingFileNames[i] == filename) {
+                        alert("This file exists. Please choose another file!");
+                        return;
+                    }
+                }
+
+                data.submit();
+                $("#progressbar").progressbar({
+                    value: false
+                }).show();
+            },
+            done: function (e, data) {
+                $.each(data.result, function (index, file) {
+                    //$('<p/>').text(file.name).appendTo(document.body);
+                    if (file.thumbnail_url) {
+
+                        var newImgHtml = '<li>																				    			\
+							    <a class="thumb" href="' + file.url + '" title="' + file.title + '">                                        \
+								    <img src="' + file.thumbnail_url + '" alt="Dynamically Added Image" />                                  \
+							    </a>																										\
+							    <div class="caption">																						\
+								    <div class="download">																					\
+									    <a href="' + file.url + '">Download Original</a>                                            		\
+								    </div>																									\
+								    <div class="image-title">' + file.name + '</div>													\
+								    <div class="image-desc">																				\
+									    Description	                                                                            			\
+								    </div>																									\
+							    </div>																										\
+						    </li>'
+
+                        if (!gallery) {
+                            $(".thumbs").html(newImgHtml);
+                            gallery = initializeGallary();
+                        }
+                        else {
+
+                            /********************** Add Image ************************/
+
+                            gallery.appendImage(newImgHtml);
+                        }
+                        $("#gallery").show();
+
+                        var existing = $("#imageFileNames").val();
+                        if (existing.length > 0) {
+                            $("#imageFileNames").val(existing + ";" + file.name);
+                        }
+                        else {
+                            $("#imageFileNames").val(file.name);
+                        }
+                    }
+                });
+                $("#progressbar").progressbar({
+                    value: 100
+                }).fadeOut('normal');
+            },
+            fail: function (e, data) {
+                // data.errorThrown
+                //alert(data.textStatus);
+                var responseTitle = $(data.jqXHR.responseText).filter('title').get(0);
+                alert($(responseTitle).text());
+                //alert(data.jqXHR.responseText);
+            }
+        });
+
+        $(".add-button").click(function () {
+            document.getElementById("fileupload").click()
+        });
+    });
+
+    function initializeGallary() {
+        // Initially set opacity on thumbs and add
+        // additional styling for hover effect on thumbs
+        var onMouseOutOpacity = 0.67;
+        $('#thumbs ul.thumbs li').opacityrollover({
+            mouseOutOpacity: onMouseOutOpacity,
+            mouseOverOpacity: 1.0,
+            fadeSpeed: 'fast',
+            exemptionSelector: '.selected'
+        });
+
+        // Enable toggling of the caption
+        var captionOpacity = 0.0;
+        $('#captionToggle a').click(function (e) {
+            var link = $(this);
+
+            var isOff = link.hasClass('off');
+            var removeClass = isOff ? 'off' : 'on';
+            var addClass = isOff ? 'on' : 'off';
+            var linkText = isOff ? 'Hide Caption' : 'Show Caption';
+            captionOpacity = isOff ? 0.7 : 0.0;
+
+            link.removeClass(removeClass).addClass(addClass).text(linkText).attr('title', linkText);
+            $('#caption span.image-caption').fadeTo(1000, captionOpacity);
+
+            e.preventDefault();
+        });
+
+        // Initialize Advanced Galleriffic Gallery
+       return $('#thumbs').galleriffic({
+            delay: 2500,
+            numThumbs: 15,
+            preloadAhead: 10,
+            enableTopPager: true,
+            enableBottomPager: true,
+            maxPagesToShow: 7,
+            imageContainerSel: '#slideshow',
+            controlsContainerSel: '#controls',
+            captionContainerSel: '#caption',
+            loadingContainerSel: '#loading',
+            renderSSControls: true,
+            renderNavControls: true,
+            playLinkText: 'Play Slideshow',
+            pauseLinkText: 'Pause Slideshow',
+            prevLinkText: '&lsaquo; Previous Photo',
+            nextLinkText: 'Next Photo &rsaquo;',
+            nextPageLinkText: 'Next &rsaquo;',
+            prevPageLinkText: '&lsaquo; Prev',
+            enableHistory: false,
+            enableKeyboardNavigation: false,
+            autoStart: false,
+            syncTransitions: true,
+            defaultTransitionDuration: 900,
+            onSlideChange: function (prevIndex, nextIndex) {
+                // 'this' refers to the gallery, which is an extension of $('#thumbs')
+                this.find('ul.thumbs').children()
+                        .eq(prevIndex).fadeTo('fast', onMouseOutOpacity).end()
+                        .eq(nextIndex).fadeTo('fast', 1.0);
+            },
+            onTransitionOut: function (slide, caption, isSync, callback) {
+                slide.fadeTo(this.getDefaultTransitionDuration(isSync), 0.0, callback);
+                caption.fadeTo(this.getDefaultTransitionDuration(isSync), 0.0);
+            },
+            onTransitionIn: function (slide, caption, isSync) {
+                var duration = this.getDefaultTransitionDuration(isSync);
+                slide.fadeTo(duration, 1.0);
+
+                // Position the caption at the bottom of the image and set its opacity
+                var slideImage = slide.find('img');
+                caption.width(slideImage.width())
+                        .css({
+                            'bottom': Math.floor((slide.height() - slideImage.outerHeight()) / 2),
+                            'left': Math.floor((slide.width() - slideImage.width()) / 2) + slideImage.outerWidth() - slideImage.width()
+                        })
+                        .fadeTo(duration, captionOpacity);
+
+                // Resize the transitionIn img to fit the page layout
+                $("#slideshow img").width(500).height("auto");
+            },
+            onPageTransitionOut: function (callback) {
+                this.fadeTo('fast', 0.0, callback);
+            },
+            onPageTransitionIn: function () {
+                this.fadeTo('fast', 1.0);
+            },
+            onImageAdded: function (imageData, $li) {
+                $li.opacityrollover({
+                    mouseOutOpacity: onMouseOutOpacity,
+                    mouseOverOpacity: 1.0,
+                    fadeSpeed: 'fast',
+                    exemptionSelector: '.selected'
+                });
+                $("#gallery").css("display", "block");
+                imageData.gallery.gotoIndex(imageData.index);
+            }
+        });
+    }
+</script>
