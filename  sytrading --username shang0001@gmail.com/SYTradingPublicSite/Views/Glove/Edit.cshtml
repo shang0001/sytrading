@@ -1,0 +1,78 @@
+﻿@model SYTradingPublicSite.Models.Glove
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Glove</legend>
+
+        @Html.HiddenFor(model => model.GloveID)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ItemNo)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ItemNo)
+            @Html.ValidationMessageFor(model => model.ItemNo)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Description)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Description)
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Sizes)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Sizes)
+            @Html.ValidationMessageFor(model => model.Sizes)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Colors)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Colors)
+            @Html.ValidationMessageFor(model => model.Colors)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.MaterialID, "Material")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("MaterialID", String.Empty)
+            @Html.ValidationMessageFor(model => model.MaterialID)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

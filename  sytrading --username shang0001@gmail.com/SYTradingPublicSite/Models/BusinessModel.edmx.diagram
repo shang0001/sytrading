@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="cd11d3bf8d7f46879d59f9d98123bb7d" Name="Diagram1">
+        <EntityTypeShape EntityType="businessDbModel.Application" Width="1.5" PointX="3" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="businessDbModel.Glove" Width="1.5" PointX="3" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="businessDbModel.GloveApplication" Width="1.5" PointX="5.25" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="businessDbModel.ImagePath" Width="1.5" PointX="5.25" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="businessDbModel.Material" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
+        <AssociationConnector Association="businessDbModel.FK_dbo_GloveApplication_dbo_Application_ApplicationID" ManuallyRouted="false" />
+        <AssociationConnector Association="businessDbModel.FK_dbo_Glove_dbo_Material_MaterialID" ManuallyRouted="false" />
+        <AssociationConnector Association="businessDbModel.FK_dbo_GloveApplication_dbo_Glove_GloveID" ManuallyRouted="false" />
+        <AssociationConnector Association="businessDbModel.FK_dbo_ImagePath_dbo_Glove_GloveID" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="businessDbModel.Customer" Width="1.5" PointX="5.6733382314785095" PointY="15.549072973220177" />
+        <EntityTypeShape EntityType="businessDbModel.Message" Width="1.5" PointX="10.61888446035743" PointY="17.96845515909067" />
+        <AssociationConnector Association="businessDbModel.FK_dbo_Message_dbo_Customer_CustomerID" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

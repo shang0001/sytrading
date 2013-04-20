@@ -1,0 +1,150 @@
+﻿@model SYTradingPublicSite.ViewModels.GloveViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span3">
+            <div class="well sidebar-nav">
+                <ul class="nav nav-list">
+                    <li class="nav-header">Browse by Applications</li>
+                    @foreach (var item in Model.ApplicationCategories)
+                    {
+                        string strCSSClass = item == Model.selectedApplicationCategory ? "active" : null;
+                        <li class="@strCSSClass">@Html.ActionLink(item, "Index", new { selectedApplicationCategory = item })</li>
+                    }
+                    <li class="nav-header">Browse by Materials</li>
+                    @foreach (var item in Model.Materials)
+                    {
+                        string strCSSClass = item.MaterialID == Model.selectedMaterialID ? "active" : null;
+                        <li class="@strCSSClass">@Html.ActionLink(item.Name, "Index", new { materialID = item.MaterialID })</li>
+                    }
+                </ul>
+            </div>
+            <!--/.well -->
+        </div>
+        <!--/span-->
+        <div class="span9">
+            <div class="row-fluid">
+                <div class="span8">
+                    <fieldset>
+                        <legend>@Html.DisplayFor(model => model.Gloves[0].Name)</legend>
+
+                        @*                        <!-- Place somewhere in the <body> of your page -->
+                        <div class="flexslider">
+                            <ul class="slides">
+                                <li data-thumb="~/FlexSlider2/demo/images/kitchen_adventurer_caramel.jpg">
+                                    <img src="~/FlexSlider2/demo/images/kitchen_adventurer_caramel.jpg" />
+                                </li>
+                                <li data-thumb="~/FlexSlider2/demo/images/kitchen_adventurer_cheesecake_brownie.jpg">
+                                    <img src="~/FlexSlider2/demo/images/kitchen_adventurer_cheesecake_brownie.jpg" />
+                                </li>
+                                <li data-thumb="~/FlexSlider2/demo/images/kitchen_adventurer_donut.jpg">
+                                    <img src="~/FlexSlider2/demo/images/kitchen_adventurer_donut.jpg" />
+                                </li>
+                                <li data-thumb="~/FlexSlider2/demo/images/kitchen_adventurer_lemon.jpg">
+                                    <img src="~/FlexSlider2/demo/images/kitchen_adventurer_lemon.jpg" />
+                                </li>
+                            </ul>
+                        </div>*@
+
+                        @foreach (SYTradingPublicSite.Models.ImagePath img in Model.Gloves[0].ImagePaths)
+                        {
+                            <a class="group1" href="@img.Path" title="@img.Glove.Name">
+                                <img src="@img.Path" /></a>
+                        }
+
+                        <div class="display-label">
+                            @Html.DisplayNameFor(model => model.Gloves[0].Description)
+                        </div>
+                        <div class="display-field">
+                            @Html.DisplayFor(model => model.Gloves[0].Description)
+                        </div>
+                        <br />
+                        <div class="display-label">
+                            Applications
+                        </div>
+                        <div class="display-field">
+                            @foreach (var item in Model.Gloves[0].GloveApplications)
+                            {
+                                @:* @Html.DisplayFor(modelItem => item.Application.Name) <br />
+                            }
+                        </div>
+                        <br />
+                        <div class="row-fluid detail-table">
+                            <div class="span3">
+                                <div class="display-label">@Html.DisplayNameFor(model => model.Gloves[0].ItemNo)</div>
+                                <div class="display-field">@Html.DisplayFor(model => model.Gloves[0].ItemNo)</div>
+                            </div>
+                            <div class="span3">
+                                <div class="display-label">Material</div>
+                                <div class="display-field">@Html.DisplayFor(model => model.Gloves[0].Material.Name)</div>
+                            </div>
+                            <div class="span3">
+                                <div class="display-label">@Html.DisplayNameFor(model => model.Gloves[0].Sizes)</div>
+                                <div class="display-field">@Html.DisplayFor(model => model.Gloves[0].Sizes)</div>
+                            </div>
+                            <div class="span3">
+                                <div class="display-label">@Html.DisplayNameFor(model => model.Gloves[0].Colors)</div>
+                                <div class="display-field">@Html.DisplayFor(model => model.Gloves[0].Colors)</div>
+                            </div>
+                        </div>
+
+                        @if (Model.RelatedGloves.Count > 0){
+                        <br />
+                        <br />
+                        <div class="suggest-label">
+                            You may also like:
+                        </div>
+                        }
+                        @for (int i = 0; i < Model.RelatedGloves.Count; i++)
+                        {
+                            SYTradingPublicSite.Models.Glove glove = Model.RelatedGloves[i];
+
+                            if ((i + 1) % 3 == 1)
+                            {
+                            @: <div class="row-fluid show-grid">
+                            }   
+
+                                @: <div class="span4">
+                                    if (glove.ImagePaths.Count > 0)
+                                    {
+                                        <img src="@Model.ImageThumbnailStrings[glove.GloveID]" />
+                                    }
+                                    <h4>@glove.Name</h4>
+                                    <p><a class="btn" href="@Url.Action("Details", new { id = glove.GloveID })"><span class="hidden-phone">View details</span> &raquo;</a></p>
+                                @: </div>
+
+                                    if ((i + 1) % 3 == 0 || i + 1 == Model.RelatedGloves.Count)
+                                    {
+                            @: </div>
+                            }
+                        }
+                    </fieldset>
+                    <p>&nbsp;</p>
+                    <p>
+                        @Html.ActionLink("Back to List", "Index")
+                    </p>
+                </div>
+                <!--/span-->
+                <div class="span4">
+                    <h2>Heading</h2>
+                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+                    <p><a class="btn" href="#">View details &raquo;</a></p>
+                </div>
+                <!--/span-->
+            </div>
+            <!--/row-->
+        </div>
+        <!--/span-->
+    </div>
+    <!--/row-->
+</div>
+<!--/.fluid-container-->
+
+<script>
+    //$('.flexslider').flexslider({ animation: "slide", controlNav: "thumbnails" });
+    $(".group1").colorbox({ rel: 'group1', height: "80%" });
+</script>

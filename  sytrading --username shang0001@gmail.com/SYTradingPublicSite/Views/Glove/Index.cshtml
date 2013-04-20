@@ -1,0 +1,71 @@
+﻿@model SYTradingPublicSite.ViewModels.GloveViewModel
+
+@{
+    ViewBag.Title = "Gloves";
+}
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span3">
+            <div class="well sidebar-nav">
+                <ul class="nav nav-list">
+                    <li class="nav-header">Browse by Applications</li>
+                    @foreach (var item in Model.ApplicationCategories)
+                    {
+                        string strCSSClass = item == Model.selectedApplicationCategory ? "active" : null;
+                        <li class="@strCSSClass">@Html.ActionLink(item, "Index", new { selectedApplicationCategory = item })</li>
+                    }
+                    <li class="nav-header">Browse by Materials</li>
+                    @foreach (var item in Model.Materials)
+                    {
+                        string strCSSClass = item.MaterialID == Model.selectedMaterialID ? "active" : null;
+                        <li class="@strCSSClass">@Html.ActionLink(item.Name, "Index", new { materialID = item.MaterialID })</li>
+                    }
+                </ul>
+            </div>
+            <!--/.well -->
+        </div>
+        <!--/span-->
+        <div class="span9">
+            <div class="hero-unit">
+                <h1>Hello, world!</h1>
+                <p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+                <p><a href="#" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
+            </div>
+            @for (int i = 0; i < Model.Gloves.Count; i++)
+            {
+                SYTradingPublicSite.Models.Glove glove = Model.Gloves[i];
+
+                if ((i + 1) % 3 == 1)
+                {
+                    @: <div class="row-fluid show-grid">
+                }   
+                        @: <div class="span4">
+                            if (glove.ImagePaths.Count > 0)
+                            {
+                                <img src="@Model.ImageThumbnailStrings[glove.GloveID]" />
+                            }
+                            <h4>@glove.Name dasdsadasdad</h4>
+                            <p class="hidden-phone">@glove.Description</p>
+                            <p><a class="btn" href="@Url.Action("Details", new { id=glove.GloveID })"><span class="hidden-phone">View details</span> &raquo;</a></p>
+                        @: </div>
+
+                            if ((i + 1) % 3 == 0 || i + 1 == Model.Gloves.Count)
+                            {
+                    @: </div>
+                            }
+            }
+        </div>
+        <!--/span-->
+    </div>
+    <!--/row-->
+</div>
+<!--/.fluid-container-->
+
+<script>
+    if ($('span[class="hidden-phone"]').css("display") == "none") {
+        $('.show-grid [class*="span"]').click(function () {
+            location.href = $("a", this).attr("href");
+        });
+    }
+</script>

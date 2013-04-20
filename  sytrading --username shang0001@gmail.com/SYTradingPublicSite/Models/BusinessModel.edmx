@@ -1,0 +1,477 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="businessDbModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="businessDbModelStoreContainer">
+          <EntitySet Name="Application" EntityType="businessDbModel.Store.Application" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Customer" EntityType="businessDbModel.Store.Customer" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Glove" EntityType="businessDbModel.Store.Glove" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="GloveApplication" EntityType="businessDbModel.Store.GloveApplication" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ImagePath" EntityType="businessDbModel.Store.ImagePath" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Material" EntityType="businessDbModel.Store.Material" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Message" EntityType="businessDbModel.Store.Message" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_dbo_Glove_dbo_Material_MaterialID" Association="businessDbModel.Store.FK_dbo_Glove_dbo_Material_MaterialID">
+            <End Role="Material" EntitySet="Material" />
+            <End Role="Glove" EntitySet="Glove" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_GloveApplication_dbo_Application_ApplicationID" Association="businessDbModel.Store.FK_dbo_GloveApplication_dbo_Application_ApplicationID">
+            <End Role="Application" EntitySet="Application" />
+            <End Role="GloveApplication" EntitySet="GloveApplication" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_GloveApplication_dbo_Glove_GloveID" Association="businessDbModel.Store.FK_dbo_GloveApplication_dbo_Glove_GloveID">
+            <End Role="Glove" EntitySet="Glove" />
+            <End Role="GloveApplication" EntitySet="GloveApplication" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ImagePath_dbo_Glove_GloveID" Association="businessDbModel.Store.FK_dbo_ImagePath_dbo_Glove_GloveID">
+            <End Role="Glove" EntitySet="Glove" />
+            <End Role="ImagePath" EntitySet="ImagePath" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Message_dbo_Customer_CustomerID" Association="businessDbModel.Store.FK_dbo_Message_dbo_Customer_CustomerID">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Message" EntitySet="Message" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Application">
+          <Key>
+            <PropertyRef Name="ApplicationID" />
+          </Key>
+          <Property Name="ApplicationID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="Category" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="20" />
+          <Property Name="FirstName" Type="nvarchar" Nullable="false" MaxLength="200" />
+          <Property Name="LastName" Type="nvarchar" Nullable="false" MaxLength="200" />
+          <Property Name="CompanyName" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="100" />
+          <Property Name="Fax" Type="nvarchar" MaxLength="100" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="City" Type="nvarchar(max)" />
+          <Property Name="Province" Type="nvarchar(max)" />
+          <Property Name="PostalCode" Type="nvarchar(max)" />
+          <Property Name="Country" Type="nvarchar(max)" />
+          <Property Name="NewsLetter" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Glove">
+          <Key>
+            <PropertyRef Name="GloveID" />
+          </Key>
+          <Property Name="GloveID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ItemNo" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Sizes" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Colors" Type="nvarchar" Nullable="false" MaxLength="200" />
+          <Property Name="MaterialID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GloveApplication">
+          <Key>
+            <PropertyRef Name="GloveApplicationID" />
+          </Key>
+          <Property Name="GloveApplicationID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="GloveID" Type="int" Nullable="false" />
+          <Property Name="ApplicationID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ImagePath">
+          <Key>
+            <PropertyRef Name="ImagePathID" />
+          </Key>
+          <Property Name="ImagePathID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Path" Type="nvarchar(max)" />
+          <Property Name="HashString" Type="nvarchar(max)" />
+          <Property Name="ThumbnailString" Type="nvarchar(max)" />
+          <Property Name="GloveID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Material">
+          <Key>
+            <PropertyRef Name="MaterialID" />
+          </Key>
+          <Property Name="MaterialID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="MessageID" />
+          </Key>
+          <Property Name="MessageID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerID" Type="int" Nullable="false" />
+          <Property Name="Subject" Type="nvarchar(max)" />
+          <Property Name="Body" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_dbo_Glove_dbo_Material_MaterialID">
+          <End Role="Material" Type="businessDbModel.Store.Material" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Glove" Type="businessDbModel.Store.Glove" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Material">
+              <PropertyRef Name="MaterialID" />
+            </Principal>
+            <Dependent Role="Glove">
+              <PropertyRef Name="MaterialID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_GloveApplication_dbo_Application_ApplicationID">
+          <End Role="Application" Type="businessDbModel.Store.Application" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="GloveApplication" Type="businessDbModel.Store.GloveApplication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Application">
+              <PropertyRef Name="ApplicationID" />
+            </Principal>
+            <Dependent Role="GloveApplication">
+              <PropertyRef Name="ApplicationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_GloveApplication_dbo_Glove_GloveID">
+          <End Role="Glove" Type="businessDbModel.Store.Glove" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="GloveApplication" Type="businessDbModel.Store.GloveApplication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Glove">
+              <PropertyRef Name="GloveID" />
+            </Principal>
+            <Dependent Role="GloveApplication">
+              <PropertyRef Name="GloveID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ImagePath_dbo_Glove_GloveID">
+          <End Role="Glove" Type="businessDbModel.Store.Glove" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ImagePath" Type="businessDbModel.Store.ImagePath" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Glove">
+              <PropertyRef Name="GloveID" />
+            </Principal>
+            <Dependent Role="ImagePath">
+              <PropertyRef Name="GloveID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Message_dbo_Customer_CustomerID">
+          <End Role="Customer" Type="businessDbModel.Store.Customer" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Message" Type="businessDbModel.Store.Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Message">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="businessDbModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="businessDbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Applications" EntityType="businessDbModel.Application" />
+          <EntitySet Name="Gloves" EntityType="businessDbModel.Glove" />
+          <EntitySet Name="GloveApplications" EntityType="businessDbModel.GloveApplication" />
+          <EntitySet Name="ImagePaths" EntityType="businessDbModel.ImagePath" />
+          <EntitySet Name="Materials" EntityType="businessDbModel.Material" />
+          <AssociationSet Name="FK_dbo_GloveApplication_dbo_Application_ApplicationID" Association="businessDbModel.FK_dbo_GloveApplication_dbo_Application_ApplicationID">
+            <End Role="Application" EntitySet="Applications" />
+            <End Role="GloveApplication" EntitySet="GloveApplications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Glove_dbo_Material_MaterialID" Association="businessDbModel.FK_dbo_Glove_dbo_Material_MaterialID">
+            <End Role="Material" EntitySet="Materials" />
+            <End Role="Glove" EntitySet="Gloves" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_GloveApplication_dbo_Glove_GloveID" Association="businessDbModel.FK_dbo_GloveApplication_dbo_Glove_GloveID">
+            <End Role="Glove" EntitySet="Gloves" />
+            <End Role="GloveApplication" EntitySet="GloveApplications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ImagePath_dbo_Glove_GloveID" Association="businessDbModel.FK_dbo_ImagePath_dbo_Glove_GloveID">
+            <End Role="Glove" EntitySet="Gloves" />
+            <End Role="ImagePath" EntitySet="ImagePaths" />
+          </AssociationSet>
+          <EntitySet Name="Customers" EntityType="businessDbModel.Customer" />
+          <EntitySet Name="Messages" EntityType="businessDbModel.Message" />
+          <AssociationSet Name="FK_dbo_Message_dbo_Customer_CustomerID" Association="businessDbModel.FK_dbo_Message_dbo_Customer_CustomerID">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Message" EntitySet="Messages" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Application">
+          <Key>
+            <PropertyRef Name="ApplicationID" />
+          </Key>
+          <Property Name="ApplicationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Category" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="GloveApplications" Relationship="businessDbModel.FK_dbo_GloveApplication_dbo_Application_ApplicationID" FromRole="Application" ToRole="GloveApplication" />
+        </EntityType>
+        <EntityType Name="Glove">
+          <Key>
+            <PropertyRef Name="GloveID" />
+          </Key>
+          <Property Name="GloveID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ItemNo" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Sizes" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Colors" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
+          <Property Name="MaterialID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Material" Relationship="businessDbModel.FK_dbo_Glove_dbo_Material_MaterialID" FromRole="Glove" ToRole="Material" />
+          <NavigationProperty Name="GloveApplications" Relationship="businessDbModel.FK_dbo_GloveApplication_dbo_Glove_GloveID" FromRole="Glove" ToRole="GloveApplication" />
+          <NavigationProperty Name="ImagePaths" Relationship="businessDbModel.FK_dbo_ImagePath_dbo_Glove_GloveID" FromRole="Glove" ToRole="ImagePath" />
+        </EntityType>
+        <EntityType Name="GloveApplication">
+          <Key>
+            <PropertyRef Name="GloveApplicationID" />
+          </Key>
+          <Property Name="GloveApplicationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GloveID" Type="Int32" Nullable="false" />
+          <Property Name="ApplicationID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Application" Relationship="businessDbModel.FK_dbo_GloveApplication_dbo_Application_ApplicationID" FromRole="GloveApplication" ToRole="Application" />
+          <NavigationProperty Name="Glove" Relationship="businessDbModel.FK_dbo_GloveApplication_dbo_Glove_GloveID" FromRole="GloveApplication" ToRole="Glove" />
+        </EntityType>
+        <EntityType Name="ImagePath">
+          <Key>
+            <PropertyRef Name="ImagePathID" />
+          </Key>
+          <Property Name="ImagePathID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Path" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="HashString" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="ThumbnailString" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="GloveID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Glove" Relationship="businessDbModel.FK_dbo_ImagePath_dbo_Glove_GloveID" FromRole="ImagePath" ToRole="Glove" />
+        </EntityType>
+        <EntityType Name="Material">
+          <Key>
+            <PropertyRef Name="MaterialID" />
+          </Key>
+          <Property Name="MaterialID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Gloves" Relationship="businessDbModel.FK_dbo_Glove_dbo_Material_MaterialID" FromRole="Material" ToRole="Glove" />
+        </EntityType>
+        <Association Name="FK_dbo_GloveApplication_dbo_Application_ApplicationID">
+          <End Role="Application" Type="businessDbModel.Application" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="GloveApplication" Type="businessDbModel.GloveApplication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Application">
+              <PropertyRef Name="ApplicationID" />
+            </Principal>
+            <Dependent Role="GloveApplication">
+              <PropertyRef Name="ApplicationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Glove_dbo_Material_MaterialID">
+          <End Role="Material" Type="businessDbModel.Material" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Glove" Type="businessDbModel.Glove" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Material">
+              <PropertyRef Name="MaterialID" />
+            </Principal>
+            <Dependent Role="Glove">
+              <PropertyRef Name="MaterialID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_GloveApplication_dbo_Glove_GloveID">
+          <End Role="Glove" Type="businessDbModel.Glove" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="GloveApplication" Type="businessDbModel.GloveApplication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Glove">
+              <PropertyRef Name="GloveID" />
+            </Principal>
+            <Dependent Role="GloveApplication">
+              <PropertyRef Name="GloveID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ImagePath_dbo_Glove_GloveID">
+          <End Role="Glove" Type="businessDbModel.Glove" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ImagePath" Type="businessDbModel.ImagePath" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Glove">
+              <PropertyRef Name="GloveID" />
+            </Principal>
+            <Dependent Role="ImagePath">
+              <PropertyRef Name="GloveID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Type="Int32" Name="CustomerID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="CompanyName" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Phone" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Fax" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Address" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="City" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Province" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="PostalCode" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Country" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="NewsLetter" Nullable="false" />
+          <NavigationProperty Name="Messages" Relationship="businessDbModel.FK_dbo_Message_dbo_Customer_CustomerID" FromRole="Customer" ToRole="Message" />
+        </EntityType>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="MessageID" />
+          </Key>
+          <Property Type="Int32" Name="MessageID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="CustomerID" Nullable="false" />
+          <Property Type="String" Name="Subject" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Body" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Customer" Relationship="businessDbModel.FK_dbo_Message_dbo_Customer_CustomerID" FromRole="Message" ToRole="Customer" />
+        </EntityType>
+        <Association Name="FK_dbo_Message_dbo_Customer_CustomerID">
+          <End Type="businessDbModel.Customer" Role="Customer" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="businessDbModel.Message" Role="Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Message">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="businessDbModelStoreContainer" CdmEntityContainer="businessDbEntities">
+          <EntitySetMapping Name="Applications">
+            <EntityTypeMapping TypeName="businessDbModel.Application">
+              <MappingFragment StoreEntitySet="Application">
+                <ScalarProperty Name="ApplicationID" ColumnName="ApplicationID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Gloves">
+            <EntityTypeMapping TypeName="businessDbModel.Glove">
+              <MappingFragment StoreEntitySet="Glove">
+                <ScalarProperty Name="GloveID" ColumnName="GloveID" />
+                <ScalarProperty Name="ItemNo" ColumnName="ItemNo" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Sizes" ColumnName="Sizes" />
+                <ScalarProperty Name="Colors" ColumnName="Colors" />
+                <ScalarProperty Name="MaterialID" ColumnName="MaterialID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GloveApplications">
+            <EntityTypeMapping TypeName="businessDbModel.GloveApplication">
+              <MappingFragment StoreEntitySet="GloveApplication">
+                <ScalarProperty Name="GloveApplicationID" ColumnName="GloveApplicationID" />
+                <ScalarProperty Name="GloveID" ColumnName="GloveID" />
+                <ScalarProperty Name="ApplicationID" ColumnName="ApplicationID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ImagePaths">
+            <EntityTypeMapping TypeName="businessDbModel.ImagePath">
+              <MappingFragment StoreEntitySet="ImagePath">
+                <ScalarProperty Name="ImagePathID" ColumnName="ImagePathID" />
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="HashString" ColumnName="HashString" />
+                <ScalarProperty Name="ThumbnailString" ColumnName="ThumbnailString" />
+                <ScalarProperty Name="GloveID" ColumnName="GloveID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Materials">
+            <EntityTypeMapping TypeName="businessDbModel.Material">
+              <MappingFragment StoreEntitySet="Material">
+                <ScalarProperty Name="MaterialID" ColumnName="MaterialID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="businessDbModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="NewsLetter" ColumnName="NewsLetter" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="Province" ColumnName="Province" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Messages">
+            <EntityTypeMapping TypeName="businessDbModel.Message">
+              <MappingFragment StoreEntitySet="Message">
+                <ScalarProperty Name="Body" ColumnName="Body" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="MessageID" ColumnName="MessageID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

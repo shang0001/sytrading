@@ -1,0 +1,224 @@
+﻿@model SYTradingPublicSite.ViewModels.HomeViewModel
+
+@{
+    ViewBag.Title = "Contact";
+}
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span4">
+            <hgroup class="title">
+                <h1>@ViewBag.Title.</h1>
+                <h2>@ViewBag.Message</h2>
+            </hgroup>
+
+            <section class="contact">
+                <header>
+                    <h3>Phone</h3>
+                </header>
+                <p>
+                    <span class="label">Main:</span>
+                    <span>425.555.0100</span>
+                </p>
+                <p>
+                    <span class="label">After Hours:</span>
+                    <span>425.555.0199</span>
+                </p>
+            </section>
+
+            <section class="contact">
+                <header>
+                    <h3>Email</h3>
+                </header>
+                <p>
+                    <span class="label">Support:</span>
+                    <span><a href="mailto:Support@example.com">Support@example.com</a></span>
+                </p>
+                <p>
+                    <span class="label">Marketing:</span>
+                    <span><a href="mailto:Marketing@example.com">Marketing@example.com</a></span>
+                </p>
+                <p>
+                    <span class="label">General:</span>
+                    <span><a href="mailto:General@example.com">General@example.com</a></span>
+                </p>
+            </section>
+
+            <section class="contact">
+                <header>
+                    <h3>Address</h3>
+                </header>
+                <p>
+                    One Microsoft Way<br />
+                    Redmond, WA 98052-6399
+                </p>
+            </section>
+        </div>
+        <div class="span8">
+            @if (ViewBag.Create)
+            {
+                <h2>Leave us your message</h2>
+
+                using (Html.BeginForm())
+                {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+
+                <div class="row-fluid">
+                    <div class="span5">
+                        <fieldset>
+                            <legend>Customer</legend>
+
+                            <div class="editor-label">
+                                @Html.LabelFor(model => model.Customer.Title)
+                            </div>
+                            <div class="editor-field">
+                                @Html.DropDownListFor(model => model.Customer.Title, Model.Titles)
+                                @Html.ValidationMessageFor(model => model.Customer.Title)
+                            </div>
+
+                            <div class="editor-label">
+                                @Html.LabelFor(model => model.Customer.FirstName)
+                            </div>
+                            <div class="editor-field">
+                                @Html.EditorFor(model => model.Customer.FirstName)
+                                @Html.ValidationMessageFor(model => model.Customer.FirstName)
+                            </div>
+
+                            <div class="editor-label">
+                                @Html.LabelFor(model => model.Customer.LastName)
+                            </div>
+                            <div class="editor-field">
+                                @Html.EditorFor(model => model.Customer.LastName)
+                                @Html.ValidationMessageFor(model => model.Customer.LastName)
+                            </div>
+
+                            <div class="accordion" id="accordion2">
+                                <div class="accordion-group">
+                                    <div class="accordion-heading">
+                                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">Add your address also
+                                        </a>
+                                    </div>
+                                    <div id="collapseOne" class="accordion-body collapse in">
+                                        <div class="accordion-inner">
+                                            <div class="editor-label">
+                                                @Html.LabelFor(model => model.Customer.CompanyName)
+                                            </div>
+                                            <div class="editor-field">
+                                                @Html.EditorFor(model => model.Customer.CompanyName)
+                                                @Html.ValidationMessageFor(model => model.Customer.CompanyName)
+                                            </div>
+
+                                            <div class="editor-label">
+                                                @Html.LabelFor(model => model.Customer.Address)
+                                            </div>
+                                            <div class="editor-field">
+                                                @Html.EditorFor(model => model.Customer.Address)
+                                                @Html.ValidationMessageFor(model => model.Customer.Address)
+                                            </div>
+
+                                            <div class="editor-label">
+                                                @Html.LabelFor(model => model.Customer.City)
+                                            </div>
+                                            <div class="editor-field">
+                                                @Html.EditorFor(model => model.Customer.City)
+                                                @Html.ValidationMessageFor(model => model.Customer.City)
+                                            </div>
+
+                                            <div class="editor-label">
+                                                @Html.LabelFor(model => model.Customer.Province)
+                                            </div>
+                                            <div class="editor-field">
+                                                @Html.EditorFor(model => model.Customer.Province)
+                                                @Html.ValidationMessageFor(model => model.Customer.Province)
+                                            </div>
+
+                                            <div class="editor-label">
+                                                @Html.LabelFor(model => model.Customer.PostalCode)
+                                            </div>
+                                            <div class="editor-field">
+                                                @Html.EditorFor(model => model.Customer.PostalCode)
+                                                @Html.ValidationMessageFor(model => model.Customer.PostalCode)
+                                            </div>
+
+                                            <div class="editor-label">
+                                                @Html.LabelFor(model => model.Customer.Country)
+                                            </div>
+                                            <div class="editor-field">
+                                                @Html.EditorFor(model => model.Customer.Country)
+                                                @Html.ValidationMessageFor(model => model.Customer.Country)
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="editor-label">
+                                @Html.LabelFor(model => model.Customer.Email)
+                            </div>
+                            <div class="editor-field">
+                                @Html.EditorFor(model => model.Customer.Email)
+                                @Html.ValidationMessageFor(model => model.Customer.Email)
+                            </div>
+
+                            <div class="editor-label">
+                                @Html.LabelFor(model => model.Customer.Phone)
+                            </div>
+                            <div class="editor-field">
+                                @Html.EditorFor(model => model.Customer.Phone)
+                                @Html.ValidationMessageFor(model => model.Customer.Phone)
+                            </div>
+
+                            <div class="editor-label">
+                                @Html.LabelFor(model => model.Customer.Fax)
+                            </div>
+                            <div class="editor-field">
+                                @Html.EditorFor(model => model.Customer.Fax)
+                                @Html.ValidationMessageFor(model => model.Customer.Fax)
+                            </div>
+
+                            <div class="editor-label">
+                                @Html.LabelFor(model => model.Customer.NewsLetter)
+                            </div>
+                            <div class="editor-field">
+                                @Html.EditorFor(model => model.Customer.NewsLetter)
+                                @Html.ValidationMessageFor(model => model.Customer.NewsLetter)
+                            </div>
+
+                            <p>
+                                <input class="btn" type="submit" value="Create" />
+                            </p>
+                        </fieldset>
+                    </div>
+                    <div class="span7">
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Message.Subject)
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.Message.Subject)
+                            @Html.ValidationMessageFor(model => model.Message.Subject)
+                        </div>
+
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Message.Body)
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.Message.Body)
+                            @Html.ValidationMessageFor(model => model.Message.Body)
+                        </div>
+                    </div>
+                </div>
+                }
+
+                @section Scripts {
+                    @Scripts.Render("~/bundles/jqueryval")
+                }
+            }
+            else
+            {
+                <h2>Your message has been sent to us! Thank you very much!</h2>
+            }
+        </div>
+    </div>
+</div>
