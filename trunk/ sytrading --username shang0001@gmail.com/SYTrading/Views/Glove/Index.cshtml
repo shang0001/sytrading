@@ -9,8 +9,18 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+@using (Html.BeginForm("Release", "Glove", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
 <table>
     <tr>
+        <th>
+            To release
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Released)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.ItemNo)
         </th>
@@ -34,6 +44,15 @@
 
 @foreach (var item in Model) {
     <tr>
+        <td>
+            <input type="checkbox" 
+                    name="ids" 
+                    value="@item.GloveID"
+                @(Html.Raw(item.Released ? "checked=\"checked\"" : "")) />
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Released)
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.ItemNo)
         </td>
@@ -59,5 +78,7 @@
         </td>
     </tr>
 }
-
 </table>
+    
+<input type="submit" value="Update Released Products" />
+}
