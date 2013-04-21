@@ -1,0 +1,43 @@
+﻿@model SYTrading.Models.Config
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Config</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Value)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Value)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Enabled)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Enabled)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Level)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Level)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ConfigID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

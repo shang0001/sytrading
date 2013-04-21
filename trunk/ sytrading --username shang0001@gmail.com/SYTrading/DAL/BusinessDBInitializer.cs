@@ -65,6 +65,19 @@ namespace SYTrading.DAL
             };
             gloveApplications.ForEach(s => context.GloveApplications.Add(s));
             context.SaveChanges();
+
+            var configs = new List<Config>
+            {
+                new Config { ConfigID = 1, Name = "admin_email", Value = "shang0001@msn.com", Enabled = true, Level = "ALL" },
+                new Config { ConfigID = 2, Name = "smtp_server", Value = "smtp.gmail.com", Enabled = true, Level = "ALL" },
+                new Config { ConfigID = 2, Name = "smtp_server_port", Value = "587", Enabled = true, Level = "ALL" },
+                new Config { ConfigID = 2, Name = "smtp_server_defaultCredential", Value = "false", Enabled = true, Level = "ALL" },
+                new Config { ConfigID = 3, Name = "smtp_server_username", Value = "shang0001@gmail.com", Enabled = true, Level = "ALL" },
+                new Config { ConfigID = 3, Name = "smtp_server_password", Value = "330106Sy!", Enabled = true, Level = "ALL" },
+                new Config { ConfigID = 4, Name = "smtp_server_ssl", Value = "true", Enabled = true, Level = "ALL" }
+            };
+            configs.ForEach(s => context.Configs.Add(s));
+            context.SaveChanges();
         }
     }
 }
