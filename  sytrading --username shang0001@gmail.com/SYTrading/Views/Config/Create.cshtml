@@ -1,0 +1,60 @@
+﻿@model SYTrading.Models.Config
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Config</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Value)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Value)
+            @Html.ValidationMessageFor(model => model.Value)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Enabled)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Enabled)
+            @Html.ValidationMessageFor(model => model.Enabled)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Level)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.Level, (SelectList)ViewBag.Levels)
+            @Html.ValidationMessageFor(model => model.Level)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

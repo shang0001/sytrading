@@ -17,6 +17,7 @@ namespace SYTrading.Models
         public DbSet<GloveApplication> GloveApplications { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Message> Messages { get; set; }
+        public DbSet<Config> Configs { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -157,5 +158,14 @@ namespace SYTrading.Models
         public string Body { get; set; }
 
         public virtual Customer Customer { get; set; }
+    }
+
+    public partial class Config
+    {
+        public int ConfigID { get; set; }
+        public string Name { get; set; }
+        public string Value { get; set; }
+        public bool Enabled { get; set; }
+        public string Level { get; set; }
     }
 }
