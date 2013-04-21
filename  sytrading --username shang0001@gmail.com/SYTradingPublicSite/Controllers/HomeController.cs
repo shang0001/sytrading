@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 using SYTradingPublicSite.Models;
@@ -84,9 +85,102 @@ namespace SYTradingPublicSite.Controllers
                 }
 
                 ViewBag.Create = false;
+
+                if (!string.IsNullOrEmpty(model.Message.Subject) || !string.IsNullOrEmpty(model.Message.Body))
+                {
+                    SendEmail(model.Customer.Email, (model.Customer.FirstName + " "  + model.Customer.LastName), model.Message.Subject, model.Message.Body);
+                }
             }
 
             return View();
+        }
+
+        private void SendEmail(string sender, string displayName, string subject, string body)
+        {
+            try
+            {
+                Dictionary<string, string> dictionary =
+                    db.Configs.ToDictionary(p => p.Name, c => c.Value);
+
+                MailMessage mailMsg = new MailMessage();
+                if (dictionary.ContainsKey("admin_email"))
+                {
+                    mailMsg.To.Add(dictionary["admin_email"]);
+                }
+                else
+                {
+                    throw new KeyNotFoundException("Email settings key \"admin_email\" is not found, please check immediately!");
+                }
+
+                // From
+                MailAddress mailAddress = new MailAddress(sender, displayName);
+                mailMsg.From = mailAddress;
+
+                // Subject and Body
+                mailMsg.Subject = subject;
+                mailMsg.Body = body;
+
+                SmtpClient smtpClient = null;
+                // Init SmtpClient and send on port 587 in my case. (Usual=port25)
+                if (dictionary.ContainsKey("smtp_server") && dictionary.ContainsKey("smtp_server_port"))
+                {
+                    smtpClient = new SmtpClient(
+                        dictionary["smtp_server"],
+                        int.Parse(dictionary["smtp_server_port"]));
+                }
+                else
+                {
+                    throw new KeyNotFoundException("Email settings key \"smtp_server\" or \"smtp_server_port\" is not found, please check immediately!");
+                }
+
+                if (dictionary.ContainsKey("smtp_server_defaultCredential"))
+                {
+                    if (bool.Parse(dictionary["smtp_server_defaultCredential"]) == true)
+                    {
+                        smtpClient.UseDefaultCredentials = true;
+                    }
+                    else
+                    {
+                        if (dictionary.ContainsKey("smtp_server_username") && dictionary.ContainsKey("smtp_server_password"))
+                        {
+                            System.Net.NetworkCredential credentials = new System.Net.NetworkCredential(
+                                dictionary["smtp_server_username"],
+                                dictionary["smtp_server_password"]);
+                            smtpClient.Credentials = credentials;
+                        }
+                        else
+                        {
+                            throw new KeyNotFoundException("Email settings key \"smtp_server_username\" or \"smtp_server_password\" is not found, please check immediately!");
+                        }
+                    }
+                }
+                else
+                {
+                    throw new KeyNotFoundException("Email settings key \"smtp_server_defaultCredential\" is not found, please check immediately!");
+                }
+
+                if (dictionary.ContainsKey("smtp_server_ssl"))
+                {
+                    if (bool.Parse(dictionary["smtp_server_ssl"]) == true)
+                    {
+                        smtpClient.EnableSsl = true;
+                    }
+                    else
+                    {
+                        smtpClient.EnableSsl = false;
+                    }
+                }
+                else
+                {
+                    throw new KeyNotFoundException("Email settings key \"smtp_server_ssl\" is not found, please check immediately!");
+                }
+
+                smtpClient.Send(mailMsg);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

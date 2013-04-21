@@ -12,13 +12,12 @@ namespace SYTradingPublicSite.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Message
+    public partial class Config
     {
-        public int MessageID { get; set; }
-        public int CustomerID { get; set; }
-        public string Subject { get; set; }
-        public string Body { get; set; }
-    
-        public virtual Customer Customer { get; set; }
+        public int ConfigID { get; set; }
+        public string Name { get; set; }
+        public string Value { get; set; }
+        public bool Enabled { get; set; }
+        public string Level { get; set; }
     }
 }

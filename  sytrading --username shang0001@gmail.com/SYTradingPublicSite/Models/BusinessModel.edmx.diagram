@@ -17,6 +17,7 @@
         <EntityTypeShape EntityType="businessDbModel.Customer" Width="1.5" PointX="5.6733382314785095" PointY="15.549072973220177" />
         <EntityTypeShape EntityType="businessDbModel.Message" Width="1.5" PointX="10.61888446035743" PointY="17.96845515909067" />
         <AssociationConnector Association="businessDbModel.FK_dbo_Message_dbo_Customer_CustomerID" />
+        <EntityTypeShape EntityType="businessDbModel.Config" Width="1.5" PointX="7.799025041888946" PointY="13.807655400506992" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

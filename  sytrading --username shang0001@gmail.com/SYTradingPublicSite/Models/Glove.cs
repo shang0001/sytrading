@@ -27,6 +27,7 @@ namespace SYTradingPublicSite.Models
         public string Sizes { get; set; }
         public string Colors { get; set; }
         public int MaterialID { get; set; }
+        public bool Released { get; set; }
     
         public virtual Material Material { get; set; }
         public virtual ICollection<GloveApplication> GloveApplications { get; set; }
