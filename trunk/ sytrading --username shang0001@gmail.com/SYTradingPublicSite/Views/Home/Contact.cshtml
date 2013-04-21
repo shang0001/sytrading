@@ -81,7 +81,7 @@
                                 @Html.LabelFor(model => model.Customer.FirstName)
                             </div>
                             <div class="editor-field">
-                                @Html.EditorFor(model => model.Customer.FirstName)
+                                @Html.EditorFor(model => model.Customer.FirstName) <span style="color:red">*</span>
                                 @Html.ValidationMessageFor(model => model.Customer.FirstName)
                             </div>
 
@@ -89,8 +89,16 @@
                                 @Html.LabelFor(model => model.Customer.LastName)
                             </div>
                             <div class="editor-field">
-                                @Html.EditorFor(model => model.Customer.LastName)
+                                @Html.EditorFor(model => model.Customer.LastName) <span style="color:red">*</span>
                                 @Html.ValidationMessageFor(model => model.Customer.LastName)
+                            </div>
+
+                            <div class="editor-label">
+                                @Html.LabelFor(model => model.Customer.Email)
+                            </div>
+                            <div class="editor-field">
+                                @Html.EditorFor(model => model.Customer.Email) <span style="color:red">*</span>
+                                @Html.ValidationMessageFor(model => model.Customer.Email)
                             </div>
 
                             <div class="accordion" id="accordion2">
@@ -99,8 +107,24 @@
                                         <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">Add your address also
                                         </a>
                                     </div>
-                                    <div id="collapseOne" class="accordion-body collapse in">
+                                    <div id="collapseOne" class="accordion-body collapse out">
                                         <div class="accordion-inner">
+                                            <div class="editor-label">
+                                                @Html.LabelFor(model => model.Customer.Phone)
+                                            </div>
+                                            <div class="editor-field">
+                                                @Html.EditorFor(model => model.Customer.Phone)
+                                                @Html.ValidationMessageFor(model => model.Customer.Phone)
+                                            </div>
+
+                                            <div class="editor-label">
+                                                @Html.LabelFor(model => model.Customer.Fax)
+                                            </div>
+                                            <div class="editor-field">
+                                                @Html.EditorFor(model => model.Customer.Fax)
+                                                @Html.ValidationMessageFor(model => model.Customer.Fax)
+                                            </div>
+
                                             <div class="editor-label">
                                                 @Html.LabelFor(model => model.Customer.CompanyName)
                                             </div>
@@ -154,61 +178,38 @@
                                 </div>
                             </div>
 
-                            <div class="editor-label">
-                                @Html.LabelFor(model => model.Customer.Email)
-                            </div>
-                            <div class="editor-field">
-                                @Html.EditorFor(model => model.Customer.Email)
-                                @Html.ValidationMessageFor(model => model.Customer.Email)
-                            </div>
-
-                            <div class="editor-label">
-                                @Html.LabelFor(model => model.Customer.Phone)
-                            </div>
-                            <div class="editor-field">
-                                @Html.EditorFor(model => model.Customer.Phone)
-                                @Html.ValidationMessageFor(model => model.Customer.Phone)
-                            </div>
-
-                            <div class="editor-label">
-                                @Html.LabelFor(model => model.Customer.Fax)
-                            </div>
-                            <div class="editor-field">
-                                @Html.EditorFor(model => model.Customer.Fax)
-                                @Html.ValidationMessageFor(model => model.Customer.Fax)
-                            </div>
-
-                            <div class="editor-label">
-                                @Html.LabelFor(model => model.Customer.NewsLetter)
-                            </div>
                             <div class="editor-field">
                                 @Html.EditorFor(model => model.Customer.NewsLetter)
                                 @Html.ValidationMessageFor(model => model.Customer.NewsLetter)
+                                I would like to receive the bi-weekly email news-letter that contains the latest product information and industry news.
                             </div>
-
-                            <p>
-                                <input class="btn" type="submit" value="Create" />
-                            </p>
                         </fieldset>
                     </div>
                     <div class="span7">
-                        <div class="editor-label">
-                            @Html.LabelFor(model => model.Message.Subject)
-                        </div>
-                        <div class="editor-field">
-                            @Html.EditorFor(model => model.Message.Subject)
-                            @Html.ValidationMessageFor(model => model.Message.Subject)
-                        </div>
+                         <fieldset>
+                            <legend>Your inquery: </legend>
+                            <div class="editor-label">
+                                @Html.LabelFor(model => model.Message.Subject)
+                            </div>
+                            <div class="editor-field">
+                                @Html.EditorFor(model => model.Message.Subject)
+                                @Html.ValidationMessageFor(model => model.Message.Subject)
+                            </div>
 
-                        <div class="editor-label">
-                            @Html.LabelFor(model => model.Message.Body)
-                        </div>
-                        <div class="editor-field">
-                            @Html.EditorFor(model => model.Message.Body)
-                            @Html.ValidationMessageFor(model => model.Message.Body)
-                        </div>
+                            <div class="editor-label">
+                                @Html.LabelFor(model => model.Message.Body)
+                            </div>
+                            <div class="editor-field">
+                                @Html.EditorFor(model => model.Message.Body)
+                                @Html.ValidationMessageFor(model => model.Message.Body)
+                            </div>
+                        </fieldset>
                     </div>
                 </div>
+                            
+                <p style="text-align:center">
+                    <input class="btn" type="submit" value="Submit" />
+                </p>
                 }
 
                 @section Scripts {

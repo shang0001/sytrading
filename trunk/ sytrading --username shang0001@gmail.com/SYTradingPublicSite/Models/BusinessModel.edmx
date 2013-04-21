@@ -7,6 +7,7 @@
     <Schema Namespace="businessDbModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="businessDbModelStoreContainer">
           <EntitySet Name="Application" EntityType="businessDbModel.Store.Application" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Config" EntityType="businessDbModel.Store.Config" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Customer" EntityType="businessDbModel.Store.Customer" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Glove" EntityType="businessDbModel.Store.Glove" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="GloveApplication" EntityType="businessDbModel.Store.GloveApplication" store:Type="Tables" Schema="dbo" />
@@ -42,6 +43,16 @@
           <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="100" />
           <Property Name="Category" Type="nvarchar" Nullable="false" MaxLength="50" />
         </EntityType>
+        <EntityType Name="Config">
+          <Key>
+            <PropertyRef Name="ConfigID" />
+          </Key>
+          <Property Name="ConfigID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Value" Type="nvarchar(max)" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+          <Property Name="Level" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="Customer">
           <Key>
             <PropertyRef Name="CustomerID" />
@@ -71,6 +82,7 @@
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="Sizes" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="Colors" Type="nvarchar" Nullable="false" MaxLength="200" />
+          <Property Name="Released" Type="bit" Nullable="false" />
           <Property Name="MaterialID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="GloveApplication">
@@ -210,6 +222,7 @@
             <End Role="Customer" EntitySet="Customers" />
             <End Role="Message" EntitySet="Messages" />
           </AssociationSet>
+          <EntitySet Name="Configs" EntityType="businessDbModel.Config" />
         </EntityContainer>
         <EntityType Name="Application">
           <Key>
@@ -234,6 +247,7 @@
           <NavigationProperty Name="Material" Relationship="businessDbModel.FK_dbo_Glove_dbo_Material_MaterialID" FromRole="Glove" ToRole="Material" />
           <NavigationProperty Name="GloveApplications" Relationship="businessDbModel.FK_dbo_GloveApplication_dbo_Glove_GloveID" FromRole="Glove" ToRole="GloveApplication" />
           <NavigationProperty Name="ImagePaths" Relationship="businessDbModel.FK_dbo_ImagePath_dbo_Glove_GloveID" FromRole="Glove" ToRole="ImagePath" />
+          <Property Type="Boolean" Name="Released" Nullable="false" />
         </EntityType>
         <EntityType Name="GloveApplication">
           <Key>
@@ -365,6 +379,16 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Config">
+          <Key>
+            <PropertyRef Name="ConfigID" />
+          </Key>
+          <Property Type="Int32" Name="ConfigID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Value" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="Enabled" Nullable="false" />
+          <Property Type="String" Name="Level" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -383,6 +407,7 @@
           <EntitySetMapping Name="Gloves">
             <EntityTypeMapping TypeName="businessDbModel.Glove">
               <MappingFragment StoreEntitySet="Glove">
+                <ScalarProperty Name="Released" ColumnName="Released" />
                 <ScalarProperty Name="GloveID" ColumnName="GloveID" />
                 <ScalarProperty Name="ItemNo" ColumnName="ItemNo" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -449,6 +474,17 @@
                 <ScalarProperty Name="Subject" ColumnName="Subject" />
                 <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
                 <ScalarProperty Name="MessageID" ColumnName="MessageID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Configs">
+            <EntityTypeMapping TypeName="businessDbModel.Config">
+              <MappingFragment StoreEntitySet="Config">
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ConfigID" ColumnName="ConfigID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

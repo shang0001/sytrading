@@ -210,6 +210,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BusinessModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Config.cs">
+      <DependentUpon>BusinessModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Customer.cs">
       <DependentUpon>BusinessModel.tt</DependentUpon>
     </Compile>

@@ -49,7 +49,7 @@ namespace SYTradingPublicSite.Controllers
 
             if (string.IsNullOrEmpty(selectedApplicationCategory) && string.IsNullOrEmpty(materialID))
             {
-                selectedApplicationCategory = "dasdsa";
+                selectedApplicationCategory = db.Applications.First().Category;
             }
 
             if (!string.IsNullOrEmpty(selectedApplicationCategory))
@@ -62,14 +62,20 @@ namespace SYTradingPublicSite.Controllers
 
                 foreach (int id in selectedGloveIDs)
                 {
-                    model.Gloves.Add(db.Gloves.Find(id));
+                    if (db.Gloves.Where(g => g.GloveID == id && g.Released == true).Count() > 0)
+                    {
+                        model.Gloves.Add(db.Gloves.Where(g => g.GloveID == id && g.Released == true).Single());
+                    }
                 }
                 model.selectedApplicationCategory = selectedApplicationCategory;
             }
             else
             {
                 int mid = int.Parse(materialID);
-                model.Gloves.AddRange(db.Gloves.Where(g => g.MaterialID == mid));
+                if (db.Gloves.Where(g => g.MaterialID == mid && g.Released == true).Count() > 0)
+                {
+                    model.Gloves.AddRange(db.Gloves.Where(g => g.MaterialID == mid && g.Released == true));
+                }
                 model.selectedMaterialID = mid;
             }
 
@@ -131,90 +137,6 @@ namespace SYTradingPublicSite.Controllers
             }
 
             return View(model);
-        }
-
-        //
-        // GET: /Glove/Create
-
-        public ActionResult Create()
-        {
-            ViewBag.MaterialID = new SelectList(db.Materials, "MaterialID", "Name");
-            return View();
-        }
-
-        //
-        // POST: /Glove/Create
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(Glove glove)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Gloves.Add(glove);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.MaterialID = new SelectList(db.Materials, "MaterialID", "Name", glove.MaterialID);
-            return View(glove);
-        }
-
-        //
-        // GET: /Glove/Edit/5
-
-        public ActionResult Edit(int id = 0)
-        {
-            Glove glove = db.Gloves.Find(id);
-            if (glove == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.MaterialID = new SelectList(db.Materials, "MaterialID", "Name", glove.MaterialID);
-            return View(glove);
-        }
-
-        //
-        // POST: /Glove/Edit/5
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(Glove glove)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(glove).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.MaterialID = new SelectList(db.Materials, "MaterialID", "Name", glove.MaterialID);
-            return View(glove);
-        }
-
-        //
-        // GET: /Glove/Delete/5
-
-        public ActionResult Delete(int id = 0)
-        {
-            Glove glove = db.Gloves.Find(id);
-            if (glove == null)
-            {
-                return HttpNotFound();
-            }
-            return View(glove);
-        }
-
-        //
-        // POST: /Glove/Delete/5
-
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Glove glove = db.Gloves.Find(id);
-            db.Gloves.Remove(glove);
-            db.SaveChanges();
-            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

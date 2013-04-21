@@ -32,5 +32,6 @@ namespace SYTradingPublicSite.Models
         public DbSet<Material> Materials { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Message> Messages { get; set; }
+        public DbSet<Config> Configs { get; set; }
     }
 }
