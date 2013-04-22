@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
@@ -100,7 +101,7 @@ namespace SYTradingPublicSite.Controllers
             try
             {
                 Dictionary<string, string> dictionary =
-                    db.Configs.ToDictionary(p => p.Name, c => c.Value);
+                    db.Configs.Where(c => c.Enabled == true).ToDictionary(p => p.Name, c => c.Value);
 
                 MailMessage mailMsg = new MailMessage();
                 if (dictionary.ContainsKey("admin_email"))
@@ -113,12 +114,18 @@ namespace SYTradingPublicSite.Controllers
                 }
 
                 // From
-                MailAddress mailAddress = new MailAddress(sender, displayName);
+                MailAddress mailAddress = new MailAddress(dictionary["smtp_server_username"]);
                 mailMsg.From = mailAddress;
 
                 // Subject and Body
-                mailMsg.Subject = subject;
-                mailMsg.Body = body;
+                mailMsg.Subject = "New inquery";
+                mailMsg.Body = string.Format(
+                    "There is a new inquery to Shang Yue Trading Ltd:\n\n Customer: {0}\n Email: {1}\n Subject:{2}\n Body:{3}",
+                    displayName,
+                    sender,
+                    subject,
+                    body);
+                //mailMsg.IsBodyHtml = true;
 
                 SmtpClient smtpClient = null;
                 // Init SmtpClient and send on port 587 in my case. (Usual=port25)
