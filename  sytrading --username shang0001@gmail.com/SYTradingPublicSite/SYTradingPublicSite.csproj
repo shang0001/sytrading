@@ -242,15 +242,9 @@
     <Content Include="bootstrap\css\bootstrap-responsive.min.css" />
     <Content Include="bootstrap\css\bootstrap.css" />
     <Content Include="bootstrap\css\bootstrap.min.css" />
-    <Content Include="bootstrap\img\glyphicons-halflings-white.png" />
-    <Content Include="bootstrap\img\glyphicons-halflings.png" />
     <Content Include="bootstrap\js\bootstrap.js" />
     <Content Include="bootstrap\js\bootstrap.min.js" />
     <Content Include="colorbox-ex5\colorbox.css" />
-    <Content Include="colorbox-ex5\images\border.png" />
-    <Content Include="colorbox-ex5\images\controls.png" />
-    <Content Include="colorbox-ex5\images\loading.gif" />
-    <Content Include="colorbox-ex5\images\loading_background.png" />
     <Content Include="colorbox-ex5\jquery.colorbox.js" />
     <Content Include="Content\Copy of Site.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -309,7 +303,6 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="FlexSlider2\flexslider.css" />
-    <Content Include="FlexSlider2\images\bg_direction_nav.png" />
     <Content Include="FlexSlider2\jquery.flexslider-min.js" />
     <Content Include="FlexSlider2\jquery.flexslider.js" />
     <Content Include="Global.asax" />
@@ -317,6 +310,8 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>BusinessModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="Images\bg_direction_nav.png" />
+    <Content Include="Images\border.png" />
     <Content Include="Images\browsebymaterials.jpg" />
     <Content Include="Images\browsebyapplications.jpg" />
     <Content Include="Images\banner\Home\10_6136AR.jpg" />
@@ -348,6 +343,11 @@
     <Content Include="Images\banner\Home\9_6256NAR.jpg" />
     <Content Include="Images\contact-us.jpg" />
     <Content Include="Images\contact.png" />
+    <Content Include="Images\controls.png" />
+    <Content Include="Images\glyphicons-halflings-white.png" />
+    <Content Include="Images\glyphicons-halflings.png" />
+    <Content Include="Images\loading.gif" />
+    <Content Include="Images\loading_background.png" />
     <Content Include="Models\BusinessModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>BusinessModel.edmx</DependentUpon>
