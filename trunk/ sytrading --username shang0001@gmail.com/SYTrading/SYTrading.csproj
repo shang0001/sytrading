@@ -270,6 +270,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <None Include="Properties\PublishProfiles\SmarterASP.NET_FTP.pubxml" />
+    <Content Include="Images\16px-Button_Icon_Green.svg.png" />
     <Content Include="Images\add-32.png" />
     <Content Include="Images\add-64.png" />
     <Content Include="Images\delete-64.png" />

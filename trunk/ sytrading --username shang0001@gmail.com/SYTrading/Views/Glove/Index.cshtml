@@ -18,16 +18,16 @@
         <th>
             To release
         </th>
-        <th>
+@*        <th>
             @Html.DisplayNameFor(model => model.Released)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.ItemNo)
         </th>
-        <th>
+@*        <th>
             @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
+        </th>*@
+        <th style="width: 25%;">
             @Html.DisplayNameFor(model => model.Description)
         </th>
         <th>
@@ -36,9 +36,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Colors)
         </th>
-        <th>
+@*        <th>
             @Html.DisplayNameFor(model => model.Material.Name)
-        </th>
+        </th>*@
         <th></th>
     </tr>
 
@@ -50,15 +50,22 @@
                     value="@item.GloveID"
                 @(Html.Raw(item.Released ? "checked=\"checked\"" : "")) />
         </td>
-        <td>
+@*        <td>
             @Html.DisplayFor(modelItem => item.Released)
-        </td>
+        </td>*@
         <td>
+            @if (item.Released)
+            {
+                <img style="vertical-align:middle;" src="~/Images/16px-Button_Icon_Green.svg.png" />
+            }
+            else{
+                @:&nbsp;&nbsp;&nbsp;&nbsp;
+            }
             @Html.DisplayFor(modelItem => item.ItemNo)
         </td>
-        <td>
+@*        <td>
             @Html.DisplayFor(modelItem => item.Name)
-        </td>
+        </td>*@
         <td>
             @Html.DisplayFor(modelItem => item.Description)
         </td>
@@ -68,9 +75,9 @@
         <td>
             @Html.DisplayFor(modelItem => item.Colors)
         </td>
-        <td>
+@*        <td>
             @Html.DisplayFor(modelItem => item.Material.Name)
-        </td>
+        </td>*@
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.GloveID }) |
             @Html.ActionLink("Details", "Details", new { id=item.GloveID }) |
