@@ -317,6 +317,8 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>BusinessModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="Images\browsebymaterials.jpg" />
+    <Content Include="Images\browsebyapplications.jpg" />
     <Content Include="Images\banner\Home\10_6136AR.jpg" />
     <Content Include="Images\banner\Home\11_6036AR.jpg" />
     <Content Include="Images\banner\Home\12_6046R.jpg" />
@@ -344,6 +346,8 @@
     <Content Include="Images\banner\Home\7_7256NAM.jpg" />
     <Content Include="Images\banner\Home\8_7256UA.jpg" />
     <Content Include="Images\banner\Home\9_6256NAR.jpg" />
+    <Content Include="Images\contact-us.jpg" />
+    <Content Include="Images\contact.png" />
     <Content Include="Models\BusinessModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>BusinessModel.edmx</DependentUpon>

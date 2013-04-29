@@ -19,6 +19,14 @@ form {
     margin-bottom: 0px;
 }
 
+.home-icons div{
+    text-align: center;
+}
+
+.home-icon {
+    height: 128px;
+}
+
 @media (max-width: 980px) {
     body {
         padding-top: 0px;
