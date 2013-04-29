@@ -323,7 +323,7 @@ namespace SYTrading.Controllers
 
         private string DestinationRoot
         {
-            get { return Path.Combine(Server.MapPath("~/Images/Gloves/")); }
+            get { return Path.Combine(Path.GetDirectoryName(Path.GetDirectoryName(Server.MapPath("~"))), "Gloves/"); }
         }
 
         //private string EncodeFile(byte[] inArray)
