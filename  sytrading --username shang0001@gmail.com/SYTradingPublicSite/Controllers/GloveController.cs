@@ -18,7 +18,7 @@ namespace SYTradingPublicSite.Controllers
 
         private string StorageRoot
         {
-            get { return Path.Combine(Server.MapPath("~/Gloves/")); }
+            get { return Path.Combine(Path.GetDirectoryName(Path.GetDirectoryName(Server.MapPath("~"))), "Gloves/"); }
         }
 
         [HttpGet]
