@@ -2,25 +2,19 @@
     ViewBag.Title = "About";
 }
 
-<hgroup class="title">
-    <h1>@ViewBag.Title.</h1>
-    <h2>@ViewBag.Message</h2>
-</hgroup>
-
-<article>
-    <p>
-        About our company
-    </p>
-</article>
-
-<aside>
-    <h3>Aside Title</h3>
-    <p>
-        Use this area to provide additional information.
-    </p>
-    <ul>
-        <li>@Html.ActionLink("Home", "Index", "Home")</li>
-        <li>@Html.ActionLink("About", "About", "Home")</li>
-        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-    </ul>
-</aside>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span6">
+            <h1>@ViewBag.Title.</h1>
+            <h2>@ViewBag.Message</h2>
+            </hgroup>
+            <article>
+                <p>
+                    About our company
+                </p>
+            </article>
+        </div>
+        <div class="span6">
+        </div>
+    </div>
+</div>
