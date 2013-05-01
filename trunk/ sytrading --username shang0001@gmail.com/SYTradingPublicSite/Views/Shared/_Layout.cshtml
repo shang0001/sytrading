@@ -21,37 +21,69 @@
     <link rel="shortcut icon" href="../assets/ico/favicon.png">*@
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+
+    <!-- Part 1: Wrap all page content here -->
+    <div id="wrap">
+
+      <!-- Fixed navbar -->
+      <div class="navbar navbar-fixed-top">
         <div class="navbar-inner">
-            <div class="container-fluid">
-                <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="brand" href="/">SHANGYUE Trading</a>
-                <div class="nav-collapse collapse">
-                    <ul class="nav">
-                        <li @(ViewBag.Title == "Home Page" ? "class=active" : "")>@Html.ActionLink("Home", "Index", "Home")</li>
-                        <li @(ViewBag.Title == "Gloves" ? "class=active" : "")>@Html.ActionLink("Gloves", "Index", "Glove")</li>
-                        <li @(ViewBag.Title == "About" ? "class=active" : "")>@Html.ActionLink("About", "About", "Home")</li>
-                        <li @(ViewBag.Title == "Contact" ? "class=active" : "")>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    </ul>
-                </div>
-                <!--/.nav-collapse -->
+          <div class="container">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="brand" href="/">SHANGYUE Trading</a>
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+                    <li @(ViewBag.Title == "Home Page" ? "class=active" : "")>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li @(ViewBag.Title == "Gloves" ? "class=active" : "")>@Html.ActionLink("Gloves", "Index", "Glove")</li>
+                    <li @(ViewBag.Title == "About" ? "class=active" : "")>@Html.ActionLink("About", "About", "Home")</li>
+                    <li @(ViewBag.Title == "Contact" ? "class=active" : "")>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                </ul>
             </div>
+            <!--/.nav-collapse -->
+          </div>
         </div>
+      </div>
+
+      <!-- Begin page content -->
+      @RenderBody()
+
+      <div id="push"></div>
     </div>
 
-    @RenderBody()
+    <div id="footer">
+      <div class="container">
+        <div class="row-fluid">
+            <div class="span3">
+                <img src="~/Images/contact.png" />&nbsp;&nbsp;(xxx) xxx-xxxx
+            </div>
+            <div class="span2">
+                <p>
+                    About Us
+                </p>
+            </div>
+            <div class="span2">
+                <p>
+                    Privacy Policy
+                </p>
+            </div>
+            <div class="span2">
+                <p>
+                    Terms & Conditions
+                </p>
+            </div>
+            <div class="span1">
 
-    <footer>
-        <div class="content-wrapper">
-            <div class="float-left">
+            </div>
+            <div class="span2">
                 <p>&copy; @DateTime.Now.Year - SYTrading </p>
             </div>
         </div>
-    </footer>
+      </div>
+    </div>
 
     @RenderSection("scripts", required: false)
 </body>
