@@ -111,7 +111,7 @@
                                 @: <div class="span4">
                                     if (glove.ImagePaths.Count > 0)
                                     {
-                                        <img src="@Model.ImageThumbnailStrings[glove.GloveID]" />
+                                        <img src="@Model.ImageThumbnailPath[glove.GloveID]" />
                                     }
                                     <h4>@glove.Name</h4>
                                     <p><a class="btn" href="@Url.Action("Details", new { id = glove.GloveID })"><span class="hidden-phone">View details</span> &raquo;</a></p>

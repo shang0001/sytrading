@@ -10,7 +10,7 @@ namespace SYTradingPublicSite.ViewModels
     {
         public List<Glove> Gloves { get; set; }
         public List<Glove> RelatedGloves { get; set; }
-        public Dictionary<int, string> ImageThumbnailStrings { get; set; }
+        public Dictionary<int, string> ImageThumbnailPath { get; set; }
         public Material[] Materials { get; set; }
         public string[] ApplicationCategories { get; set; }
         public string selectedApplicationCategory { get; set; }

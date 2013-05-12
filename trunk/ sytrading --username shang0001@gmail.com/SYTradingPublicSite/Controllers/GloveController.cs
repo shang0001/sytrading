@@ -6,7 +6,6 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using SYTrading.Upload;
 using SYTradingPublicSite.Models;
 using SYTradingPublicSite.ViewModels;
 
@@ -22,10 +21,10 @@ namespace SYTradingPublicSite.Controllers
         }
 
         [HttpGet]
-        public void Download(string id)
+        public void Download(string id, bool thumbnail = false)
         {
             var filename = id;
-            var filePath = Path.Combine(StorageRoot, filename);
+            var filePath = thumbnail ? Path.Combine(StorageRoot, "thumbnails/" + filename) : Path.Combine(StorageRoot, filename);
 
             var context = HttpContext;
 
@@ -83,8 +82,7 @@ namespace SYTradingPublicSite.Controllers
             {
                 if (glove.ImagePaths.Count > 0)
                 {
-                    string filename = Path.GetFileName(glove.ImagePaths.First().Path);
-                    model.ImageThumbnailStrings.Add(glove.GloveID, @"data:image/png;base64," + UploadHelper.GenerateThumbnailString(Path.Combine(StorageRoot, filename)));
+                    model.ImageThumbnailPath.Add(glove.GloveID, glove.ImagePaths.First().Path + "?thumbnail=true");
                 }
             }
             
@@ -125,9 +123,7 @@ namespace SYTradingPublicSite.Controllers
                 if (!model.RelatedGloves.Contains(relatedGlove) && relatedGlove.ImagePaths.Count > 0)
                 {
                     model.RelatedGloves.Add(relatedGlove);
-
-                    string filename = Path.GetFileName(relatedGlove.ImagePaths.First().Path);
-                    model.ImageThumbnailStrings.Add(relatedGlove.GloveID, @"data:image/png;base64," + UploadHelper.GenerateThumbnailString(Path.Combine(StorageRoot, filename)));
+                    model.ImageThumbnailPath.Add(relatedGlove.GloveID, relatedGlove.ImagePaths.First().Path + "?thumbnail=true");
 
                     if (model.RelatedGloves.Count == 5)
                     {
@@ -150,7 +146,7 @@ namespace SYTradingPublicSite.Controllers
             GloveViewModel model = new GloveViewModel();
             model.Gloves = new List<Glove>();
             model.RelatedGloves = new List<Glove>();
-            model.ImageThumbnailStrings = new Dictionary<int, string>();
+            model.ImageThumbnailPath = new Dictionary<int, string>();
 
             model.ApplicationCategories = db.Applications.GroupBy(a => a.Category).Select(lst => lst.Key).ToArray();
             model.Materials = db.Materials.ToArray();
