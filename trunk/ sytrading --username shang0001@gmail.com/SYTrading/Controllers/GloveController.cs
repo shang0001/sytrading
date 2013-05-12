@@ -187,7 +187,12 @@ namespace SYTrading.Controllers
                             var sourceFullPath = StorageRoot + Path.GetFileName(filename);
                             var destFullPath = DestinationRoot + Path.GetFileName(filename);
 
+                            // Save original file
                             System.IO.File.Copy(sourceFullPath, destFullPath, true);
+                            
+                            // Save 200px thumbnail image
+                            byte[] thumbnailBuffer = Upload.UploadHelper.GenerateThumbnailBytes(destFullPath, 200);
+                            System.IO.File.WriteAllBytes(Path.Combine(DestinationRoot, "thumbnails/" + filename), thumbnailBuffer);
 
                             db.ImagePaths.Add(new ImagePath { GloveID = gloveViewData.Glove.GloveID, Path = "/Glove/Download/" + filename, ThumbnailString = Upload.UploadHelper.GenerateThumbnailString(destFullPath) });
                         }
@@ -199,9 +204,11 @@ namespace SYTrading.Controllers
                         {
                             // Old file, remove file from server
                             var deleteFullPath = DestinationRoot + Path.GetFileName(img.Path);
+                            var deletethumbnailFullPath = DestinationRoot + Path.Combine("thumbnails", Path.GetFileName(img.Path));
                             if (System.IO.File.Exists(deleteFullPath))
                             {
                                 System.IO.File.Delete(deleteFullPath);
+                                System.IO.File.Delete(deletethumbnailFullPath);
                             }
                             db.ImagePaths.Remove(img);
                         }
@@ -213,9 +220,11 @@ namespace SYTrading.Controllers
                     {
                         // No file, remove all files from server
                         var deleteFullPath = DestinationRoot + Path.GetFileName(img.Path);
+                        var deletethumbnailFullPath = DestinationRoot + Path.Combine("thumbnails", Path.GetFileName(img.Path));
                         if (System.IO.File.Exists(deleteFullPath))
                         {
                             System.IO.File.Delete(deleteFullPath);
+                            System.IO.File.Delete(deletethumbnailFullPath);
                         }
 
                         db.ImagePaths.Remove(img);
@@ -316,6 +325,21 @@ namespace SYTrading.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult GenerateThumbnails()
+        {
+            System.IO.DirectoryInfo dir = new System.IO.DirectoryInfo(DestinationRoot);
+            foreach (System.IO.FileInfo file in dir.GetFiles())
+            {
+                // Save 200px thumbnail image
+                using(FileStream fileStream = file.Open(FileMode.Open, FileAccess.Read)){
+                    byte[] thumbnailBuffer = Upload.UploadHelper.GenerateThumbnailBytes(fileStream, 200);
+                    System.IO.File.WriteAllBytes(Path.Combine(DestinationRoot, "thumbnails/" + file.Name), thumbnailBuffer);
+                }
+            }
+
+            return RedirectToAction("Index");
+        }
+
         private string StorageRoot
         {
             get { return Path.Combine(Server.MapPath("~/Upload/UploadedFiles/")); }
@@ -325,37 +349,5 @@ namespace SYTrading.Controllers
         {
             get { return Path.Combine(Path.GetDirectoryName(Path.GetDirectoryName(Server.MapPath("~"))), "Gloves/"); }
         }
-
-        //private string EncodeFile(byte[] inArray)
-        //{
-        //    return Convert.ToBase64String(inArray);
-        //}
-
-        //private byte[] GenerateThumbnail(string fileName)
-        //{
-        //    // Make thumbnail
-        //    int thumbWidth = 50;
-        //    System.Drawing.Image image = System.Drawing.Image.FromFile(fileName);
-        //    float srcWidth = image.Width;
-        //    float srcHeight = image.Height;
-        //    int thumbHeight = (int)((srcHeight / srcWidth) * thumbWidth);
-        //    Bitmap bmp = new Bitmap(thumbWidth, thumbHeight);
-
-        //    System.Drawing.Graphics gr = System.Drawing.Graphics.FromImage(bmp);
-        //    gr.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-        //    gr.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
-        //    gr.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.High;
-
-        //    System.Drawing.Rectangle rectDestination = new System.Drawing.Rectangle(0, 0, thumbWidth, thumbHeight);
-        //    gr.DrawImage(image, rectDestination, 0, 0, srcWidth, srcHeight, GraphicsUnit.Pixel);
-
-        //    MemoryStream ms = new MemoryStream();
-        //    bmp.Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
-
-        //    bmp.Dispose();
-        //    image.Dispose();
-
-        //    return ms.ToArray();
-        //}
     }
 }

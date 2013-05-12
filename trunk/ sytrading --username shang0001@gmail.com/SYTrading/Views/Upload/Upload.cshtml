@@ -49,9 +49,9 @@
                         <div class="download">																					
 							<a href="@item.Path">Download Original</a>                                            		
 						</div>																									
-						<div class="image-title">Dynamically Added Image</div>													
+						<div class="image-title">@item.Glove.Name</div>													
 						<div class="image-desc">																				
-							Description	                                                                            			
+							@item.Glove.Description	                                                                            			
 						</div>
                     </div>
                 </li>
@@ -173,9 +173,7 @@
 									    <a href="' + file.url + '">Download Original</a>                                            		\
 								    </div>																									\
 								    <div class="image-title">' + file.name + '</div>													\
-								    <div class="image-desc">																				\
-									    Description	                                                                            			\
-								    </div>																									\
+								    <div class="image-desc">' +	file.description + '</div>																									\
 							    </div>																										\
 						    </li>'
 
