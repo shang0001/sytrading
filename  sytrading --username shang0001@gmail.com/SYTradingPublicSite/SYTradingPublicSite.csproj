@@ -233,7 +233,6 @@
       <DependentUpon>BusinessModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Controllers\UploadHelper.cs" />
     <Compile Include="ViewModels\GloveViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
   </ItemGroup>
