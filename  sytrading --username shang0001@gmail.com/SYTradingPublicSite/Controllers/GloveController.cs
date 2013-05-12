@@ -118,7 +118,7 @@ namespace SYTradingPublicSite.Controllers
                     break;
                 }
 
-                Glove relatedGlove = db.Gloves.Find(anotherGAs.First().GloveID);
+                Glove relatedGlove = db.Gloves.Find(anotherGAs.Where(g => g.Glove.Released == true).First().GloveID);
 
                 if (!model.RelatedGloves.Contains(relatedGlove) && relatedGlove.ImagePaths.Count > 0)
                 {
