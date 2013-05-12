@@ -59,6 +59,7 @@ namespace SYTrading.Controllers
                     type = file.ContentType,
                     url = "/Upload/Download/" + newFileName,
                     title = Path.GetFileNameWithoutExtension(newFileName).Substring(Path.GetFileNameWithoutExtension(newFileName).LastIndexOf("_") + 1),
+                    description = "Newly added image, to view the decription, please save first",
                     delete_url = "/Home/Delete/" + newFileName,
                     thumbnail_url = @"data:image/png;base64," + SYTrading.Upload.UploadHelper.GenerateThumbnailString(file.InputStream),
                     delete_type = "GET",
@@ -128,6 +129,7 @@ namespace SYTrading.Controllers
             public string type { get; set; }
             public string url { get; set; }
             public string title { get; set; }
+            public string description { get; set; }
             public string delete_url { get; set; }
             public string thumbnail_url { get; set; }
             public string delete_type { get; set; }
