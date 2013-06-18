@@ -49,6 +49,10 @@ form {
     margin-bottom: 0px;
 }
 
+.hero-unit {
+    padding: 30px 30px 1px 30px;
+}
+
 .home-icons div{
     text-align: center;
 }
@@ -85,6 +89,15 @@ form {
         padding-right: 5px;
     }
 }
+
+/* Sidebar Nav */
+.sidebar-nav {
+    padding: 0px;
+}
+
+    .sidebar-nav .accordion {
+        margin-bottom: 0px;
+    }
 
 
 /* Special grid styles
