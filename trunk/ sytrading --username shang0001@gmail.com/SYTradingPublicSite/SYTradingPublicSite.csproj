@@ -411,6 +411,7 @@
     <Content Include="Views\Glove\Create.cshtml" />
     <Content Include="Views\Glove\Edit.cshtml" />
     <Content Include="Views\Glove\Delete.cshtml" />
+    <Content Include="Views\Glove\SidebarNav.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

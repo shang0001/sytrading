@@ -7,23 +7,7 @@
 <div class="container-fluid">
     <div class="row-fluid">
         <div class="span3">
-            <div class="well sidebar-nav">
-                <ul class="nav nav-list">
-                    <li class="nav-header">Browse by Applications</li>
-                    @foreach (var item in Model.ApplicationCategories)
-                    {
-                        string strCSSClass = item == Model.selectedApplicationCategory ? "active" : null;
-                        <li class="@strCSSClass">@Html.ActionLink(item, "Index", new { selectedApplicationCategory = item })</li>
-                    }
-                    <li class="nav-header">Browse by Materials</li>
-                    @foreach (var item in Model.Materials)
-                    {
-                        string strCSSClass = item.MaterialID == Model.selectedMaterialID ? "active" : null;
-                        <li class="@strCSSClass">@Html.ActionLink(item.Name, "Index", new { materialID = item.MaterialID })</li>
-                    }
-                </ul>
-            </div>
-            <!--/.well -->
+            @Html.Partial("SidebarNav")
         </div>
         <!--/span-->
         <div class="span9">
