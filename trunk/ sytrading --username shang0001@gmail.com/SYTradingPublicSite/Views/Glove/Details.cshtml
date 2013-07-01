@@ -37,7 +37,7 @@
                         @foreach (SYTradingPublicSite.Models.ImagePath img in Model.Gloves[0].ImagePaths)
                         {
                             <a class="group1" href="@img.Path" title="@img.Glove.Name">
-                                <img src="@img.Path" /></a>
+                                <img src="@img.Path" class="img-polaroid" /></a>
                         }
 
                         <div class="display-label">
@@ -96,7 +96,7 @@
                                 @: <div class="span4">
                                     if (glove.ImagePaths.Count > 0)
                                     {
-                                        <img src="@Model.ImageThumbnailPath[glove.GloveID]" />
+                                        <img src="@Model.ImageThumbnailPath[glove.GloveID]" class="img-polaroid" />
                                     }
                                     <h4>@glove.Name</h4>
                                     <p><a class="btn" href="@Url.Action("Details", new { id = glove.GloveID })"><span class="hidden-phone">View details</span> &raquo;</a></p>

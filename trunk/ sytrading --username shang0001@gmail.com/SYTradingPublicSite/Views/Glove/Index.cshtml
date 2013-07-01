@@ -11,11 +11,11 @@
         </div>
         <!--/span-->
         <div class="span9">
-            <div class="hero-unit">
+@*            <div class="hero-unit">
                 <h1>Hello, world!</h1>
                 <p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
                 <p><a href="#" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
-            </div>
+            <div>*@
             @for (int i = 0; i < Model.Gloves.Count; i++)
             {
                 SYTradingPublicSite.Models.Glove glove = Model.Gloves[i];
@@ -27,7 +27,7 @@
                         @: <div class="span4">
                             if (glove.ImagePaths.Count > 0)
                             {
-                                <img src="@Model.ImageThumbnailPath[glove.GloveID]" />
+                                <img src="@Model.ImageThumbnailPath[glove.GloveID]" class="img-polaroid" />
                             }
                             <h4>@glove.Name</h4>
                             <p class="hidden-phone">@glove.Description</p>

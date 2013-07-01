@@ -57,7 +57,7 @@ namespace SYTradingPublicSite.Controllers
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "SHANGYUE TRADING LIMITED";
             ViewBag.Create = true;
 
             var viewModel = new HomeViewModel();
