@@ -5,6 +5,7 @@ html,
 body {
     height: 100%;
     /* The html and body elements cannot have any padding or margin. */
+    background-color: #E0F5FF;
 }
 
 /* Wrapper for page content to push down footer */
@@ -236,7 +237,7 @@ a[class*="group"] img {
             padding-right: 10px;
             min-height: 84px;
             line-height: 84;
-            background-color: #eee;
+            background-color: #E0E0EB;
             /*margin-left: 20px !important;*/
         }
 
@@ -249,6 +250,10 @@ a[class*="group"] img {
                 float: left;
                 margin: 0.7em 0em 0.7em 0.3em;
             }
+
+                .show-grid [class*="span"] .img-polaroid {
+                    padding-bottom: 0px;
+                }
 
             .show-grid [class*="span"] h4 {
                 float: left;
