@@ -311,6 +311,7 @@
     </EntityDeploy>
     <Content Include="Images\bg_direction_nav.png" />
     <Content Include="Images\border.png" />
+    <Content Include="Images\browsebyapplications.png" />
     <Content Include="Images\browsebymaterials.jpg" />
     <Content Include="Images\browsebyapplications.jpg" />
     <Content Include="Images\banner\Home\10_6136AR.jpg" />
@@ -340,7 +341,9 @@
     <Content Include="Images\banner\Home\7_7256NAM.jpg" />
     <Content Include="Images\banner\Home\8_7256UA.jpg" />
     <Content Include="Images\banner\Home\9_6256NAR.jpg" />
+    <Content Include="Images\browsebymaterials.png" />
     <Content Include="Images\contact-us.jpg" />
+    <Content Include="Images\contact-us.png" />
     <Content Include="Images\contact.png" />
     <Content Include="Images\controls.png" />
     <Content Include="Images\glyphicons-halflings-white.png" />
