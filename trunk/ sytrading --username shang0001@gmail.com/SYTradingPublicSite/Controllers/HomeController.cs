@@ -43,7 +43,7 @@ namespace SYTradingPublicSite.Controllers
         {
             ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
             ViewBag.BannerImages = Directory.EnumerateFiles(this.StorageRoot)
-                                        .Select(p => Path.GetFileName(p)).ToArray();
+                                        .Select(p => Path.GetFileName(p)).OrderBy(p => Path.GetFileName(p)).ToArray();
 
             return View();
         }
