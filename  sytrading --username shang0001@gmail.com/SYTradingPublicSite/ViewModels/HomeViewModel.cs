@@ -12,5 +12,6 @@ namespace SYTradingPublicSite.ViewModels
         public Customer Customer { get; set; }
         public Message Message { get; set; }
         public SelectList Titles { get; set; }
+        public SelectList Countries { get; set; }
     }
 }
