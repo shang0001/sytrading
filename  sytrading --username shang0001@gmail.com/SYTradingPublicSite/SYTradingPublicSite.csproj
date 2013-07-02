@@ -309,38 +309,20 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>BusinessModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="Images\banner\Home\1.jpg" />
+    <Content Include="Images\banner\Home\2.jpg" />
+    <Content Include="Images\banner\Home\3.jpg" />
+    <Content Include="Images\banner\Home\4.jpg" />
+    <Content Include="Images\banner\Home\5.jpg" />
+    <Content Include="Images\banner\Home\6.jpg" />
+    <Content Include="Images\banner\Home\7.jpg" />
+    <Content Include="Images\banner\Home\8.jpg" />
+    <Content Include="Images\banner\Home\9.jpg" />
     <Content Include="Images\bg_direction_nav.png" />
     <Content Include="Images\border.png" />
     <Content Include="Images\browsebyapplications.png" />
     <Content Include="Images\browsebymaterials.jpg" />
     <Content Include="Images\browsebyapplications.jpg" />
-    <Content Include="Images\banner\Home\10_6136AR.jpg" />
-    <Content Include="Images\banner\Home\11_6036AR.jpg" />
-    <Content Include="Images\banner\Home\12_6046R.jpg" />
-    <Content Include="Images\banner\Home\13_6047R.jpg" />
-    <Content Include="Images\banner\Home\14_6146R.jpg" />
-    <Content Include="Images\banner\Home\15_6147R.jpg" />
-    <Content Include="Images\banner\Home\16_6136R.jpg" />
-    <Content Include="Images\banner\Home\17_6136R-GR.jpg" />
-    <Content Include="Images\banner\Home\18_6107R.jpg" />
-    <Content Include="Images\banner\Home\19_6156TAR.jpg" />
-    <Content Include="Images\banner\Home\1_6256TAR.jpg" />
-    <Content Include="Images\banner\Home\20_6256B.jpg" />
-    <Content Include="Images\banner\Home\21_6256NAR-GR.jpg" />
-    <Content Include="Images\banner\Home\22_6256NAR-Y.jpg" />
-    <Content Include="Images\banner\Home\23_6256WFR.jpg" />
-    <Content Include="Images\banner\Home\24_6356S.jpg" />
-    <Content Include="Images\banner\Home\25_5256NP-1.jpg" />
-    <Content Include="Images\banner\Home\26_5256NP-2.jpg" />
-    <Content Include="Images\banner\Home\27_5256N.jpg" />
-    <Content Include="Images\banner\Home\28_5256DA.jpg" />
-    <Content Include="Images\banner\Home\2_6136PR.jpg" />
-    <Content Include="Images\banner\Home\4_7046.jpg" />
-    <Content Include="Images\banner\Home\5_7047.jpg" />
-    <Content Include="Images\banner\Home\6_7256NA.jpg" />
-    <Content Include="Images\banner\Home\7_7256NAM.jpg" />
-    <Content Include="Images\banner\Home\8_7256UA.jpg" />
-    <Content Include="Images\banner\Home\9_6256NAR.jpg" />
     <Content Include="Images\browsebymaterials.png" />
     <Content Include="Images\contact-us.jpg" />
     <Content Include="Images\contact-us.png" />
