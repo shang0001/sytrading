@@ -102,6 +102,10 @@ namespace SYTrading.Controllers
 
                             System.IO.File.Copy(sourceFullPath, destFullPath, true);
 
+                            // Save 200px thumbnail image
+                            byte[] thumbnailBuffer = Upload.UploadHelper.GenerateThumbnailBytes(destFullPath, 200);
+                            System.IO.File.WriteAllBytes(Path.Combine(ThumbnailFolder, newFileName), thumbnailBuffer);
+
                             db.ImagePaths.Add(new ImagePath { GloveID = createdGlove.GloveID, Path = "/Glove/Download/" + newFileName, ThumbnailString = Upload.UploadHelper.GenerateThumbnailString(destFullPath) });
                         }
                     }
@@ -192,7 +196,7 @@ namespace SYTrading.Controllers
                             
                             // Save 200px thumbnail image
                             byte[] thumbnailBuffer = Upload.UploadHelper.GenerateThumbnailBytes(destFullPath, 200);
-                            System.IO.File.WriteAllBytes(Path.Combine(DestinationRoot, "thumbnails/" + filename), thumbnailBuffer);
+                            System.IO.File.WriteAllBytes(Path.Combine(ThumbnailFolder, filename), thumbnailBuffer);
 
                             db.ImagePaths.Add(new ImagePath { GloveID = gloveViewData.Glove.GloveID, Path = "/Glove/Download/" + filename, ThumbnailString = Upload.UploadHelper.GenerateThumbnailString(destFullPath) });
                         }
@@ -204,7 +208,7 @@ namespace SYTrading.Controllers
                         {
                             // Old file, remove file from server
                             var deleteFullPath = DestinationRoot + Path.GetFileName(img.Path);
-                            var deletethumbnailFullPath = DestinationRoot + Path.Combine("thumbnails", Path.GetFileName(img.Path));
+                            var deletethumbnailFullPath = Path.Combine(ThumbnailFolder, Path.GetFileName(img.Path));
                             if (System.IO.File.Exists(deleteFullPath))
                             {
                                 System.IO.File.Delete(deleteFullPath);
@@ -220,7 +224,7 @@ namespace SYTrading.Controllers
                     {
                         // No file, remove all files from server
                         var deleteFullPath = DestinationRoot + Path.GetFileName(img.Path);
-                        var deletethumbnailFullPath = DestinationRoot + Path.Combine("thumbnails", Path.GetFileName(img.Path));
+                        var deletethumbnailFullPath = Path.Combine(ThumbnailFolder, Path.GetFileName(img.Path));
                         if (System.IO.File.Exists(deleteFullPath))
                         {
                             System.IO.File.Delete(deleteFullPath);
@@ -271,6 +275,12 @@ namespace SYTrading.Controllers
                 if (System.IO.File.Exists(deleteFullPath))
                 {
                     System.IO.File.Delete(deleteFullPath);
+                }
+
+                var deleteThumbnailFullPath = ThumbnailFolder + Path.GetFileName(img.Path);
+                if (System.IO.File.Exists(deleteThumbnailFullPath))
+                {
+                    System.IO.File.Delete(deleteThumbnailFullPath);
                 }
             }
             db.Gloves.Remove(glove);
@@ -333,7 +343,7 @@ namespace SYTrading.Controllers
                 // Save 200px thumbnail image
                 using(FileStream fileStream = file.Open(FileMode.Open, FileAccess.Read)){
                     byte[] thumbnailBuffer = Upload.UploadHelper.GenerateThumbnailBytes(fileStream, 200);
-                    System.IO.File.WriteAllBytes(Path.Combine(DestinationRoot, "thumbnails/" + file.Name), thumbnailBuffer);
+                    System.IO.File.WriteAllBytes(Path.Combine(ThumbnailFolder, file.Name), thumbnailBuffer);
                 }
             }
 
@@ -348,6 +358,21 @@ namespace SYTrading.Controllers
         private string DestinationRoot
         {
             get { return Path.Combine(Path.GetDirectoryName(Path.GetDirectoryName(Server.MapPath("~"))), "Gloves/"); }
+        }
+
+        private string ThumbnailFolder
+        {
+            get
+            {
+                string absolutePath = Path.Combine(DestinationRoot, "thumbnails/");
+
+                if (!Directory.Exists(absolutePath))
+                {
+                    Directory.CreateDirectory(absolutePath);
+                }
+
+                return Path.Combine(absolutePath);
+            }
         }
     }
 }
