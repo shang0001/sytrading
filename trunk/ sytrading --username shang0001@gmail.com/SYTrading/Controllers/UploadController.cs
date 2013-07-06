@@ -72,7 +72,16 @@ namespace SYTrading.Controllers
 
         private string StorageRoot
         {
-            get { return Path.Combine(Server.MapPath("~/Upload/UploadedFiles/")); }
+            get {
+                string absolutePath = Server.MapPath("~/Upload/UploadedFiles/");
+                
+                if (!Directory.Exists(absolutePath))
+                {
+                    Directory.CreateDirectory(absolutePath);
+                }
+
+                return Path.Combine(absolutePath); 
+            }
         }
 
         //private string EncodeFile(string fileName)
