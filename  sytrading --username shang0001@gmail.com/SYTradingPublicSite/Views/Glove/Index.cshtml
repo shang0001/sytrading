@@ -29,9 +29,10 @@
                             {
                                 <img src="@Model.ImageThumbnailPath[glove.GloveID]" class="img-polaroid" />
                             }
-                            <h4>@glove.Name</h4>
+                            <h4>@glove.ItemNo</h4>
+                            <h4 class="hidden-phone">@glove.Name</h4>
                             <p class="hidden-phone">@glove.Description</p>
-                            <p><a class="btn" href="@Url.Action("Details", new { id=glove.GloveID })"><span class="hidden-phone">View details</span> &raquo;</a></p>
+                            <p><a class="btn" href="@Url.Action("Details", new { id=glove.GloveID, selectedApplicationCategory=Model.selectedApplicationCategory, selectedMaterialID=Model.selectedMaterialID })"><span class="hidden-phone">View details</span> &raquo;</a></p>
                         @: </div>
 
                             if ((i + 1) % 3 == 0 || i + 1 == Model.Gloves.Count)

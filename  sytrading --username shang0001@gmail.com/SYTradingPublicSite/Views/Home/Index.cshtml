@@ -3,34 +3,25 @@
 }
 
 <div class="container">
-    <!-- Main hero unit for a primary marketing message or call to action -->
+@*    <!-- Main hero unit for a primary marketing message or call to action -->
     <div class="hero-unit">
-    <!-- Place somewhere in the <body> of your page -->
-    <div class="flexslider carousel">
-        <ul class="slides">
-            @foreach (string filename in ViewBag.BannerImages)
-            {
-                <li>
-                    <img src="@Url.Action("Download", new { id=filename })" />
-                </li>
-            }
-        </ul>
-    </div>
-    </div>
+    </div>*@
 
     <!-- Example row of columns -->
     <div class="row home-icons">
-        <div class="span4">
-            <h2>Browse by Application</h2>
-            <p><a href="@Url.Action("Index", "Glove")">
-                <img class="home-icon" src="~/Images/browsebyapplications.png" /></a></p>
+        <div class="span7">
+            <div class="flexslider">
+                <ul class="slides">
+                    @foreach (string filename in ViewBag.BannerImages)
+                    {
+                        <li>
+                            <img src="@Url.Action("Download", new { id=filename })" />
+                        </li>
+                    }
+                </ul>
+            </div>
         </div>
-        <div class="span4">
-            <h2>Browse by Material</h2>
-            <p><a href="@Url.Action("Index", "Glove", new { materialID = 1 })">
-                <img class="home-icon" src="~/Images/browsebymaterials.png" /></a></p>
-        </div>
-        <div class="span4">
+        <div class="span5">
             <h2>Contact Us</h2>
             <p><a href="@Url.Action("Contact", "Home")">
                 <img class="home-icon" src="~/Images/contact-us.png" /></a></p>
@@ -41,13 +32,7 @@
 
 <script>
     $('.flexslider').flexslider({
-        animation: "slide",
-        animationLoop: true,
-        slideshow: true,                
-        slideshowSpeed: 7000,
-        animationSpeed: 600,
-        itemWidth: 200,
-        itemMargin: 5
+        animation: "slide"
     });
 </script>
 

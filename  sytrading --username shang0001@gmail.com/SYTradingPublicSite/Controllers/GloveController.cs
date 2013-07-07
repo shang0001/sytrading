@@ -109,28 +109,62 @@ namespace SYTradingPublicSite.Controllers
 
             model.Gloves.Add(glove);
 
-            foreach (GloveApplication gloveApplication in glove.GloveApplications)
+            string selectedApplicationCategory = Request.Params["selectedApplicationCategory"];
+            string materialID = Request.Params["selectedMaterialID"];
+
+            if (!string.IsNullOrEmpty(selectedApplicationCategory))
             {
-                var anotherGAs = gloveApplication.Application.GloveApplications.Where(ga => ga.GloveApplicationID != gloveApplication.GloveApplicationID);
+                int[] selectedGloveIDs = db.Applications.Include(a => a.GloveApplications)
+                    .Where(a => a.Category == selectedApplicationCategory)
+                    .SelectMany(a => a.GloveApplications)
+                    .GroupBy(ga => ga.GloveID)
+                    .Select(ga => ga.Key).ToArray();
 
-                if (anotherGAs.Count() == 0)
+                foreach (int gid in selectedGloveIDs)
                 {
-                    break;
-                }
-
-                Glove relatedGlove = db.Gloves.Find(anotherGAs.Where(g => g.Glove.Released == true).First().GloveID);
-
-                if (!model.RelatedGloves.Contains(relatedGlove) && relatedGlove.ImagePaths.Count > 0)
-                {
-                    model.RelatedGloves.Add(relatedGlove);
-                    model.ImageThumbnailPath.Add(relatedGlove.GloveID, relatedGlove.ImagePaths.First().Path + "?thumbnail=true");
-
-                    if (model.RelatedGloves.Count == 5)
+                    if (db.Gloves.Where(g => g.GloveID != id && g.GloveID == gid && g.Released == true).Count() > 0)
                     {
-                        break;
+                        model.RelatedGloves.Add(db.Gloves.Where(g => g.GloveID != id && g.GloveID == gid && g.Released == true).Single());
                     }
                 }
+                model.selectedApplicationCategory = selectedApplicationCategory;
             }
+            else
+            {
+                int mid = int.Parse(materialID);
+                if (db.Gloves.Where(g => g.GloveID != id && g.MaterialID == mid && g.Released == true).Count() > 0)
+                {
+                    model.RelatedGloves.AddRange(db.Gloves.Where(g => g.GloveID != id && g.MaterialID == mid && g.Released == true));
+                }
+                model.selectedMaterialID = mid;
+            }
+
+
+
+
+
+            //foreach (GloveApplication gloveApplication in glove.GloveApplications)
+            //{
+            //    var anotherGAs = gloveApplication.Application.GloveApplications.Where(ga => ga.GloveApplicationID != gloveApplication.GloveApplicationID);
+
+            //    if (anotherGAs.Count() == 0)
+            //    {
+            //        break;
+            //    }
+
+            //    Glove relatedGlove = db.Gloves.Find(anotherGAs.Where(g => g.Glove.Released == true).First().GloveID);
+
+            //    if (!model.RelatedGloves.Contains(relatedGlove) && relatedGlove.ImagePaths.Count > 0)
+            //    {
+            //        model.RelatedGloves.Add(relatedGlove);
+            //        model.ImageThumbnailPath.Add(relatedGlove.GloveID, relatedGlove.ImagePaths.First().Path + "?thumbnail=true");
+
+            //        if (model.RelatedGloves.Count == 5)
+            //        {
+            //            break;
+            //        }
+            //    }
+            //}
 
             return View(model);
         }
