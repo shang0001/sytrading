@@ -4,7 +4,7 @@
     ViewBag.Title = "Details";
 }
 
-<div class="container-fluid">
+<div class="container-fluid detail-page">
     <div class="row-fluid">
         <div class="span3">
             @Html.Partial("SidebarNav")
@@ -12,34 +12,41 @@
         <!--/span-->
         <div class="span9">
             <div class="row-fluid">
-                <div class="span8">
-                    <fieldset>
-                        <legend>@Html.DisplayFor(model => model.Gloves[0].Name)</legend>
-
-                        @*                        <!-- Place somewhere in the <body> of your page -->
-                        <div class="flexslider">
-                            <ul class="slides">
-                                <li data-thumb="~/FlexSlider2/demo/images/kitchen_adventurer_caramel.jpg">
-                                    <img src="~/FlexSlider2/demo/images/kitchen_adventurer_caramel.jpg" />
-                                </li>
-                                <li data-thumb="~/FlexSlider2/demo/images/kitchen_adventurer_cheesecake_brownie.jpg">
-                                    <img src="~/FlexSlider2/demo/images/kitchen_adventurer_cheesecake_brownie.jpg" />
-                                </li>
-                                <li data-thumb="~/FlexSlider2/demo/images/kitchen_adventurer_donut.jpg">
-                                    <img src="~/FlexSlider2/demo/images/kitchen_adventurer_donut.jpg" />
-                                </li>
-                                <li data-thumb="~/FlexSlider2/demo/images/kitchen_adventurer_lemon.jpg">
-                                    <img src="~/FlexSlider2/demo/images/kitchen_adventurer_lemon.jpg" />
-                                </li>
-                            </ul>
-                        </div>*@
-
+                <div class="span4">
+                    <ul>
                         @foreach (SYTradingPublicSite.Models.ImagePath img in Model.Gloves[0].ImagePaths)
                         {
-                            <a class="group1" href="@img.Path" title="@img.Glove.Name">
-                                <img src="@img.Path" class="img-polaroid" /></a>
+                            <li style="margin-bottom: 20px;">
+                                <a class="group1" href="@img.Path" title="@img.Glove.Name">
+                                    <img src="@img.Path" class="img-polaroid" />
+                                </a>
+                            </li>
                         }
+                    </ul>
 
+@*                        <!-- To use flexslider -->
+                    <div class="flexslider">
+                        <ul class="slides">
+                            @foreach (SYTradingPublicSite.Models.ImagePath img in Model.Gloves[0].ImagePaths)
+                            {
+                                <li data-thumb="data:image/png;base64,@img.ThumbnailString">
+                                    <img src="@img.Path" />
+                                </li>
+                            }
+                        </ul>                        
+                    </div>*@
+
+@*                        <!-- To use colorbox -->
+                    @foreach (SYTradingPublicSite.Models.ImagePath img in Model.Gloves[0].ImagePaths)
+                    {
+                        <a class="group1" href="@img.Path" title="@img.Glove.Name">
+                            <img src="@img.Path" class="img-polaroid" /></a>
+                    }*@
+                </div>
+                <!--/span-->
+                <div class="span8">
+                    <fieldset>
+                        <legend>@Html.DisplayFor(model => model.Gloves[0].Name)</legend>    
                         <div class="display-label">
                             @Html.DisplayNameFor(model => model.Gloves[0].Description)
                         </div>
@@ -78,46 +85,46 @@
 
                         @if (Model.RelatedGloves.Count > 0)
                         {
-                        <br />
-                        <br />
-                        <div class="suggest-label">
-                            You may also like:
-                        </div>
+                            <br class="hidden-phone" />
+                            <br class="hidden-phone" />
+                            <div class="suggest-label">
+                                @if (!string.IsNullOrEmpty(Model.selectedApplicationCategory))
+                                {
+                                    @:You may also like other gloves for @Model.selectedApplicationCategory
+                            }
+                                else if (Model.selectedMaterialID > 0)
+                                {
+                                    @:You may also like other @Model.Materials.Where(m => m.MaterialID == Model.selectedMaterialID).Single().Name gloves:
+                            }
+                            </div>
                         }
                         @for (int i = 0; i < Model.RelatedGloves.Count; i++)
                         {
                             SYTradingPublicSite.Models.Glove glove = Model.RelatedGloves[i];
 
-                            if ((i + 1) % 3 == 1)
+                            if ((i + 1) % 6 == 1)
                             {
                             @: <div class="row-fluid show-grid">
                             }   
 
-                                @: <div class="span4">
+                                @: <div class="span2">
                                     if (glove.ImagePaths.Count > 0)
                                     {
-                                        <img src="@Model.ImageThumbnailPath[glove.GloveID]" class="img-polaroid" />
+                                        <a href="@Url.Action("Details", new { id = glove.GloveID, selectedApplicationCategory=Model.selectedApplicationCategory, selectedMaterialID=Model.selectedMaterialID })"><img src="data:image/png;base64,@glove.ImagePaths.First().ThumbnailString" class="img-polaroid" />
+                                            <h5>@glove.ItemNo</h5>
+                                        </a>
                                     }
-                                    <h4>@glove.Name</h4>
-                                    <p><a class="btn" href="@Url.Action("Details", new { id = glove.GloveID })"><span class="hidden-phone">View details</span> &raquo;</a></p>
                                 @: </div>
 
-                                    if ((i + 1) % 3 == 0 || i + 1 == Model.RelatedGloves.Count)
+                                    if ((i + 1) % 6 == 0 || i + 1 == Model.RelatedGloves.Count)
                                     {
                             @: </div>
-                            }
+                                    }
                         }
                     </fieldset>
-                    <p>&nbsp;</p>
                     <p>
-                        @Html.ActionLink("Back to List", "Index")
+                        @Html.ActionLink("Back to List", "Index", new { selectedApplicationCategory=Model.selectedApplicationCategory, MaterialID=Model.selectedMaterialID })
                     </p>
-                </div>
-                <!--/span-->
-                <div class="span4">
-                    <h2>Heading</h2>
-                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                    <p><a class="btn" href="#">View details &raquo;</a></p>
                 </div>
                 <!--/span-->
             </div>
@@ -130,6 +137,22 @@
 <!--/.fluid-container-->
 
 <script>
-    //$('.flexslider').flexslider({ animation: "slide", controlNav: "thumbnails" });
-    $(".group1").colorbox({ rel: 'group1', height: "100%" });
+    if ($('br[class="hidden-phone"]').css("display") == "none") {
+        $('.show-grid [class*="span"]').click(function () {
+            location.href = $("a", this).attr("href");
+        });
+    }
 </script>
+
+@{
+    if (!Request.Browser.IsMobileDevice) {
+        <script>
+            //$('.flexslider').flexslider({
+            //    animation: "slide",
+            //    controlNav: "thumbnails"
+            //});
+            $(".group1").colorbox({ rel: 'group1', height: "100%" });
+        </script>
+    }
+}
+

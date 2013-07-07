@@ -141,16 +141,41 @@ form {
 .display-field {
 }
 
+.detail-page > .row-fluid > .span3 {
+     position: fixed;
+}
+
+.detail-page > .row-fluid > .span9 {
+     margin-left: 25%;
+}
+
+.detail-page ul {
+    list-style:none;
+}
+
 .suggest-label {
     font-family: Vijaya;
     font-weight: bold;
     font-size: xx-large;
     color: #FF9933;
+    margin-bottom: 0.5em;
+    line-height: 30px;
 }
 
 a[class*="group"] img {
-    width: 250px;
+    max-width: 250px;
+    max-height: 250px;
 }
+
+     .detail-table .span2 {
+       width: 16.666666666666667%;
+       *width: 16.666666666666667%;
+     }
+
+     .detail-table .span4 {
+       width: 33.333333333333333%;
+       *width: 33.333333333333333%;
+     }
 
     .detail-table [class*="span"]:not(:last-child) {
         border-left: solid 1px black;
@@ -222,6 +247,8 @@ a[class*="group"] img {
     }
 
     a[class*="group"] img {
+        max-height: none;
+        max-width: none;
         width: 100%;
     }
 
@@ -239,6 +266,7 @@ a[class*="group"] img {
             line-height: 84;
             background-color: #E0E0EB;
             /*margin-left: 20px !important;*/
+            clear: both;
         }
 
             .show-grid [class*="span"]:hover {
@@ -248,12 +276,8 @@ a[class*="group"] img {
             .show-grid [class*="span"] img {
                 height: 65px;
                 float: left;
-                margin: 0.7em 0em 0.7em 0.3em;
+                margin: 5px 0em 0.7em 0.3em;
             }
-
-                .show-grid [class*="span"] .img-polaroid {
-                    padding-bottom: 0px;
-                }
 
             .show-grid [class*="span"] h4 {
                 float: left;
@@ -262,6 +286,16 @@ a[class*="group"] img {
                 overflow: hidden;
                 white-space: nowrap;
                 width: 60%;
+            }
+
+            .show-grid [class*="span"] h5 {
+                float: left;
+                margin: 1.7em 0.2em;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
+                width: 60%;
+                font-size: 20px;
             }
 
             .show-grid [class*="span"] p:last-child a {
@@ -274,6 +308,19 @@ a[class*="group"] img {
                 -moz-border-radius: 700px;
                 border-radius: 700px;
             }
+
+    .detail-page > .row-fluid > .span3 {
+         position: inherit;
+    }
+
+    .detail-page > .row-fluid > .span9 {
+         margin-left: auto;
+    }
+
+    .detail-page ul {
+        list-style:none; 
+        margin-left: 0px;
+    }
 
     .detail-table {
     }
