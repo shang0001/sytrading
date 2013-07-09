@@ -10,7 +10,7 @@
 <span class="add-button">
     <img src="~/Images/add-32.png" />
     <span>Add images...</span>
-    <input id="fileupload" type="file" name="files[]" data-url="/Upload/Upload" multiple>
+    <input id="fileupload" type="file" name="files[]" accept="image/*" data-url="/Upload/Upload" multiple>
 </span> 
 <span class="delete-button">
     <img src="~/Images/delete-32.png" />
@@ -113,9 +113,10 @@
             }
 
             // Synchronize the image file names stored for model
-            var filename = decodeURI(gallery.currentImage.image.nameProp)
+            var url = decodeURI(gallery.currentImage.slideUrl);
+            var filename = url.split("/")[url.split("/").length - 1];
             var existing = $("#imageFileNames").val();
-            $("#imageFileNames").val(existing.replace(new RegExp(filename + ';?'), ""));
+            $("#imageFileNames").val(existing.replace(new RegExp(';?' + filename, "i"), ""));
             //alert($("#imageFileNames").val());
 
             if (!gallery.removeImageByIndex(gallery.currentImage.index))
