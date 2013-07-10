@@ -1,7 +1,7 @@
 ﻿@model SYTradingPublicSite.ViewModels.GloveViewModel
 
 @{
-    ViewBag.Title = "Gloves";
+    ViewBag.Title = "Gloves" + DateTime.Now.ToLongTimeString();
 }
 
 <div class="container-fluid">
@@ -27,7 +27,7 @@
                         @: <div class="span4">
                             if (glove.ImagePaths.Count > 0)
                             {
-                                <img src="@Model.ImageThumbnailPath[glove.GloveID]" class="img-polaroid" />
+                                <img src="@glove.ImagePaths.First().Path?thumbnail=true" class="img-polaroid" />
                             }
                             <h4>@glove.ItemNo</h4>
                             <h4 class="hidden-phone">@glove.Name</h4>

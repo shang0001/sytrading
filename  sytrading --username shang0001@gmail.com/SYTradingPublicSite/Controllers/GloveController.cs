@@ -41,7 +41,7 @@ namespace SYTradingPublicSite.Controllers
 
         //
         // GET: /Glove/
-
+        [OutputCache(CacheProfile = "CacheGlove", VaryByParam = "selectedApplicationCategory;materialID", NoStore = true)]
         public ActionResult Index(string selectedApplicationCategory, string materialID)
         {
             GloveViewModel model = this.InitializeNavData();
@@ -77,21 +77,13 @@ namespace SYTradingPublicSite.Controllers
                 }
                 model.selectedMaterialID = mid;
             }
-
-            foreach (Glove glove in model.Gloves)
-            {
-                if (glove.ImagePaths.Count > 0)
-                {
-                    model.ImageThumbnailPath.Add(glove.GloveID, glove.ImagePaths.First().Path + "?thumbnail=true");
-                }
-            }
             
             return View(model);
         }
 
         //
         // GET: /Glove/Details/5
-
+        [OutputCache(CacheProfile = "CacheGlove", VaryByParam = "id", NoStore = true)]
         public ActionResult Details(int id = 0)
         {
             GloveViewModel model = this.InitializeNavData();
@@ -169,6 +161,18 @@ namespace SYTradingPublicSite.Controllers
             return View(model);
         }
 
+        public string ClearCache()
+        {
+            HttpResponse.RemoveOutputCacheItem("/Glove");
+
+            foreach (var id in db.Gloves.Select(g => g.GloveID))
+            {
+                HttpResponse.RemoveOutputCacheItem(string.Format("/Glove/Details/{0}", id));
+            }
+
+            return "Clear!";
+        }
+
         protected override void Dispose(bool disposing)
         {
             db.Dispose();
@@ -180,7 +184,6 @@ namespace SYTradingPublicSite.Controllers
             GloveViewModel model = new GloveViewModel();
             model.Gloves = new List<Glove>();
             model.RelatedGloves = new List<Glove>();
-            model.ImageThumbnailPath = new Dictionary<int, string>();
 
             model.ApplicationCategories = db.Applications.GroupBy(a => a.Category).Select(lst => lst.Key).ToArray();
             model.Materials = db.Materials.ToArray();

@@ -64,20 +64,43 @@
                             }
                         </div>
                         <br />
+@*                        testing purpose table
+                        <div id="container" style="display:table; border: 1px solid black;">
+                          <div id="row" style="display:table-row">
+
+  	                        <div id="left" style="display:table-cell; background-color:red; padding: 10px;">
+  		                        <p>@Html.DisplayFor(model => model.Gloves[0].ItemNo)</p>
+  	                        </div>
+
+  	                        <div id="middle1" style="display:table-cell; background-color:green; padding: 10px;">
+  		                        <p>@Html.DisplayFor(model => model.Gloves[0].Material.Name)</p>
+  	                        </div>
+
+                            <div id="middle2" style="display:table-cell; background-color:blue; padding: 10px;">
+  		                        <p>@Html.DisplayFor(model => model.Gloves[0].Sizes)</p>
+  	                        </div>
+
+  	                        <div id="right" style="display:table-cell; background-color:orange; padding: 10px;">
+    	                        <p>@Html.DisplayFor(model => model.Gloves[0].Colors)</p>
+  	                        </div>
+
+	                        </div>
+                        </div>
+                        <br />*@
                         <div class="row-fluid detail-table">
-                            <div class="span2">
+                            <div class="span3">
                                 <div class="display-label">@Html.DisplayNameFor(model => model.Gloves[0].ItemNo)</div>
                                 <div class="display-field">@Html.DisplayFor(model => model.Gloves[0].ItemNo)</div>
                             </div>
-                            <div class="span2">
+                            <div class="span1andhalf">
                                 <div class="display-label">Material</div>
                                 <div class="display-field">@Html.DisplayFor(model => model.Gloves[0].Material.Name)</div>
                             </div>
-                            <div class="span4">
+                            <div class="span3">
                                 <div class="display-label">@Html.DisplayNameFor(model => model.Gloves[0].Sizes)</div>
                                 <div class="display-field">@Html.DisplayFor(model => model.Gloves[0].Sizes)</div>
                             </div>
-                            <div class="span4">
+                            <div class="span4andhalf">
                                 <div class="display-label">@Html.DisplayNameFor(model => model.Gloves[0].Colors)</div>
                                 <div class="display-field">@Html.DisplayFor(model => model.Gloves[0].Colors)</div>
                             </div>
@@ -110,7 +133,14 @@
                                 @: <div class="span2">
                                     if (glove.ImagePaths.Count > 0)
                                     {
-                                        <a href="@Url.Action("Details", new { id = glove.GloveID, selectedApplicationCategory=Model.selectedApplicationCategory, selectedMaterialID=Model.selectedMaterialID })"><img src="data:image/png;base64,@glove.ImagePaths.First().ThumbnailString" class="img-polaroid" />
+                                        <a href="@Url.Action("Details", new { id = glove.GloveID, selectedApplicationCategory=Model.selectedApplicationCategory, selectedMaterialID=Model.selectedMaterialID })">
+                                            @if (Request.Browser.IsMobileDevice) {
+                                                <img src="@glove.ImagePaths.First().Path?thumbnail=true" class="img-polaroid" />
+                                            }
+                                            else
+                                            {
+                                                <img src="data:image/png;base64,@glove.ImagePaths.First().ThumbnailString" class="img-polaroid" />
+                                            }
                                             <h5>@glove.ItemNo</h5>
                                         </a>
                                     }
@@ -123,7 +153,7 @@
                         }
                     </fieldset>
                     <p>
-                        @Html.ActionLink("Back to List", "Index", new { selectedApplicationCategory=Model.selectedApplicationCategory, MaterialID=Model.selectedMaterialID })
+                        @Html.ActionLink("Back to List", "Index", new { selectedApplicationCategory = Model.selectedApplicationCategory, MaterialID = Model.selectedMaterialID })
                     </p>
                 </div>
                 <!--/span-->
@@ -145,7 +175,8 @@
 </script>
 
 @{
-    if (!Request.Browser.IsMobileDevice) {
+    if (!Request.Browser.IsMobileDevice)
+    {
         <script>
             //$('.flexslider').flexslider({
             //    animation: "slide",
