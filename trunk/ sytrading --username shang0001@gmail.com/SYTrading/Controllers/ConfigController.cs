@@ -67,6 +67,8 @@ namespace SYTrading.Controllers
 
         public ActionResult Edit(int id = 0)
         {
+            ViewBag.Levels = new SelectList(new string[] { "ALL", "Debug", "Release" });
+
             Config config = db.Configs.Find(id);
             if (config == null)
             {

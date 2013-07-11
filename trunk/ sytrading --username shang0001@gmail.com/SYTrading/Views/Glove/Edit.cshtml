@@ -16,6 +16,11 @@
 
         @Html.HiddenFor(model => model.Glove.GloveID)
 
+        <div class="editor-field">
+            @Html.LabelFor(model => model.Glove.Released, new { @style = "display:inline;" }) @Html.CheckBoxFor(model => model.Glove.Released)
+            @Html.ValidationMessageFor(model => model.Glove.Released)
+        </div>
+
         <div class="editor-label">
             @Html.LabelFor(model => model.Glove.ItemNo)
         </div>
