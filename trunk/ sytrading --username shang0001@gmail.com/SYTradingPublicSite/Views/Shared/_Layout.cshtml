@@ -2,7 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>@ViewBag.Title</title>
+    <title>@ViewBag.Title 
+        @if (HttpContext.Current.IsDebuggingEnabled) {
+            @DateTime.Now.ToLongTimeString()
+        }
+    </title>
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <meta name="viewport" content="width=device-width" />
     @Scripts.Render("~/bundles/modernizr")
@@ -60,25 +64,25 @@
             <div class="span2">
                 <img src="~/Images/contact.png" />&nbsp;&nbsp;00852-28113620
             </div>
-            <div class="span1">
+            <div class="span1 hidden-phone">
                 &nbsp;
             </div>
-            <div class="span2">
+            <div class="span2 hidden-phone">
                 <p>
                    @Html.ActionLink("About Us", "About", "Home")
                 </p>
             </div>
-            <div class="span2">
+            <div class="span2 hidden-phone">
                 <p>
                     Privacy Policy
                 </p>
             </div>
-            <div class="span2">
+            <div class="span2 hidden-phone">
                 <p>
                     Terms & Conditions
                 </p>
             </div>
-            <div class="span1">
+            <div class="span1 hidden-phone">
 
             </div>
             <div class="span2">

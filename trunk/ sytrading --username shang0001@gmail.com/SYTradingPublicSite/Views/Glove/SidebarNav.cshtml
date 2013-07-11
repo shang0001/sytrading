@@ -1,47 +1,48 @@
 ﻿@model SYTradingPublicSite.ViewModels.GloveViewModel
 <div class="well sidebar-nav">
     <div class="accordion" id="accordion1">
-    @{
-        string collapseCssClass = "";
-        if (Request.Browser.IsMobileDevice) {
-            collapseCssClass = "out"; 
-        } else {
-            collapseCssClass = "in";
-        }
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                <a class="accordion-toggle nav-header" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">Browse by Applications
+                </a>
+            </div>
+            <div id="collapseOne" class="accordion-body collapse out">
+                <div class="accordion-inner">
+                    <ul class="nav nav-list">
+                        @foreach (var item in Model.ApplicationCategories)
+                        {
+                            string strCSSClass = item == Model.selectedApplicationCategory ? "active" : null;
+                            <li class="@strCSSClass">@Html.ActionLink(item, "Index", new { selectedApplicationCategory = item })</li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                <a class="accordion-toggle nav-header" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">Browse by Materials
+                </a>
+            </div>
+            <div id="collapseTwo" class="accordion-body collapse out">
+                <div class="accordion-inner">
+                    <ul class="nav nav-list">
+                        @foreach (var item in Model.Materials)
+                        {
+                            string strCSSClass = item.MaterialID == Model.selectedMaterialID ? "active" : null;
+                            <li class="@strCSSClass">@Html.ActionLink(item.Name, "Index", new { materialID = item.MaterialID })</li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <p class="hidden-phone"></p>
+</div>
+
+<script>
+    if ($('p[class="hidden-phone"]').css("display") != "none") {
+        //alert('dada');
+        // Expand sidebar navigation for Desktop and Pad
+        $('.collapse').collapse('show');
     }
-    <div class="accordion-group">
-        <div class="accordion-heading">
-            <a class="accordion-toggle nav-header" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">Browse by Applications
-            </a>
-        </div>
-        <div id="collapseOne" class="accordion-body collapse @collapseCssClass">
-            <div class="accordion-inner">
-                <ul class="nav nav-list">
-                    @foreach (var item in Model.ApplicationCategories)
-                    {
-                        string strCSSClass = item == Model.selectedApplicationCategory ? "active" : null;
-                        <li class="@strCSSClass">@Html.ActionLink(item, "Index", new { selectedApplicationCategory = item })</li>
-                    }
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="accordion-group">
-        <div class="accordion-heading">
-            <a class="accordion-toggle nav-header" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">Browse by Materials
-            </a>
-        </div>
-        <div id="collapseTwo" class="accordion-body collapse @collapseCssClass">
-            <div class="accordion-inner">
-                <ul class="nav nav-list">
-                    @foreach (var item in Model.Materials)
-                    {
-                        string strCSSClass = item.MaterialID == Model.selectedMaterialID ? "active" : null;
-                        <li class="@strCSSClass">@Html.ActionLink(item.Name, "Index", new { materialID = item.MaterialID })</li>
-                    }
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-</div>
+</script>

@@ -161,13 +161,20 @@ namespace SYTradingPublicSite.Controllers
             return View(model);
         }
 
-        public string ClearCache()
+        public string ClearCache(int? id)
         {
             HttpResponse.RemoveOutputCacheItem("/Glove");
 
-            foreach (var id in db.Gloves.Select(g => g.GloveID))
+            if (id.HasValue)
             {
                 HttpResponse.RemoveOutputCacheItem(string.Format("/Glove/Details/{0}", id));
+            }
+            else
+            {
+                foreach (var gid in db.Gloves.Select(g => g.GloveID))
+                {
+                    HttpResponse.RemoveOutputCacheItem(string.Format("/Glove/Details/{0}", gid));
+                }
             }
 
             return "Clear!";

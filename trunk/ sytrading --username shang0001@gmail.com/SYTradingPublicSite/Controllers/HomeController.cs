@@ -39,6 +39,7 @@ namespace SYTradingPublicSite.Controllers
                 context.Response.StatusCode = 404;
         }
 
+        [OutputCache(CacheProfile = "CacheHome", VaryByParam = "none", NoStore = true)]
         public ActionResult Index()
         {
             ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
@@ -48,6 +49,7 @@ namespace SYTradingPublicSite.Controllers
             return View();
         }
 
+        [OutputCache(CacheProfile = "CacheHome", VaryByParam = "none", NoStore = true)]
         public ActionResult About()
         {
             ViewBag.Message = "Your app description page.";
@@ -55,6 +57,7 @@ namespace SYTradingPublicSite.Controllers
             return View();
         }
 
+        [OutputCache(CacheProfile = "CacheHome", VaryByParam = "none", NoStore = true)]
         public ActionResult Contact()
         {
             ViewBag.Message = "SHANGYUE TRADING LIMITED";
@@ -345,6 +348,15 @@ namespace SYTradingPublicSite.Controllers
             }
 
             return View();
+        }
+
+        public string ClearCache()
+        {
+            HttpResponse.RemoveOutputCacheItem("/Home");
+            HttpResponse.RemoveOutputCacheItem("/Home/Index");
+            HttpResponse.RemoveOutputCacheItem("/Home/About");
+            HttpResponse.RemoveOutputCacheItem("/Home/Contact");
+            return "Clear!";
         }
 
         private void SendEmail(string sender, string displayName, string subject, string body)
