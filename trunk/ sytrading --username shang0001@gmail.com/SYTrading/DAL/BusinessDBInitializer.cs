@@ -74,7 +74,8 @@ namespace SYTrading.DAL
                 new Config { ConfigID = 2, Name = "smtp_server_defaultCredential", Value = "false", Enabled = true, Level = "ALL" },
                 new Config { ConfigID = 3, Name = "smtp_server_username", Value = "shang0001@gmail.com", Enabled = true, Level = "ALL" },
                 new Config { ConfigID = 3, Name = "smtp_server_password", Value = "330106Sy!", Enabled = true, Level = "ALL" },
-                new Config { ConfigID = 4, Name = "smtp_server_ssl", Value = "true", Enabled = true, Level = "ALL" }
+                new Config { ConfigID = 4, Name = "smtp_server_ssl", Value = "true", Enabled = true, Level = "ALL" },
+                new Config { ConfigID = 4, Name = "BaseWebUrl", Value = @"http://localhost:6663", Enabled = true, Level = "Debug" }
             };
             configs.ForEach(s => context.Configs.Add(s));
             context.SaveChanges();
