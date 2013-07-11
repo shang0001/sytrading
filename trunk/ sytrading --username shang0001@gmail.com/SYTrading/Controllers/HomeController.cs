@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
@@ -28,6 +29,16 @@ namespace SYTrading.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        public ActionResult ClearCache()
+        {
+            StringBuilder result = new StringBuilder();
+            result.AppendLine(ClearCacheController.ClearCache("Home", null, null));
+            result.AppendLine(ClearCacheController.ClearCache("Glove", null, null));
+            TempData.Add("ClearCache", result);
+
+            return RedirectToAction("Index");
         }
     }
 }
