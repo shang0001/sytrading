@@ -9,6 +9,7 @@
 <p>
     @Html.ActionLink("Create New", "Create")
     @Html.ActionLink("Generate thumbnails for all glove images", "GenerateThumbnails")
+    @Html.ActionLink("Clear Cache", "ClearCache")
 </p>
 
 @using (Html.BeginForm("Release", "Glove", FormMethod.Post, new { enctype = "multipart/form-data" }))

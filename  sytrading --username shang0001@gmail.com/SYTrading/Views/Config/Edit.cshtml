@@ -43,7 +43,7 @@
             @Html.LabelFor(model => model.Level)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Level)
+            @Html.DropDownListFor(model => model.Level, (SelectList)ViewBag.Levels)
             @Html.ValidationMessageFor(model => model.Level)
         </div>
 
