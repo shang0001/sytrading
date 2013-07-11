@@ -161,7 +161,7 @@ namespace SYTradingPublicSite.Controllers
             return View(model);
         }
 
-        public string ClearCache(int? id)
+        public string ClearCache(int? id, bool? clearIndexOnly)
         {
             HttpResponse.RemoveOutputCacheItem("/Glove");
 
@@ -169,7 +169,7 @@ namespace SYTradingPublicSite.Controllers
             {
                 HttpResponse.RemoveOutputCacheItem(string.Format("/Glove/Details/{0}", id));
             }
-            else
+            else if (!(clearIndexOnly.HasValue && clearIndexOnly.Value == true))
             {
                 foreach (var gid in db.Gloves.Select(g => g.GloveID))
                 {

@@ -352,6 +352,7 @@ namespace SYTradingPublicSite.Controllers
 
         public string ClearCache()
         {
+            HttpResponse.RemoveOutputCacheItem("/");
             HttpResponse.RemoveOutputCacheItem("/Home");
             HttpResponse.RemoveOutputCacheItem("/Home/Index");
             HttpResponse.RemoveOutputCacheItem("/Home/About");
