@@ -134,13 +134,7 @@
                                     if (glove.ImagePaths.Count > 0)
                                     {
                                         <a href="@Url.Action("Details", new { id = glove.GloveID, selectedApplicationCategory=Model.selectedApplicationCategory, selectedMaterialID=Model.selectedMaterialID })">
-                                            @if (Request.Browser.IsMobileDevice) {
-                                                <img src="@glove.ImagePaths.First().Path?thumbnail=true" class="img-polaroid" />
-                                            }
-                                            else
-                                            {
-                                                <img src="data:image/png;base64,@glove.ImagePaths.First().ThumbnailString" class="img-polaroid" />
-                                            }
+                                            <img src="@glove.ImagePaths.First().Path?thumbnail=true" class="img-polaroid" />
                                             <h5>@glove.ItemNo</h5>
                                         </a>
                                     }
@@ -172,18 +166,7 @@
             location.href = $("a", this).attr("href");
         });
     }
-</script>
-
-@{
-    if (!Request.Browser.IsMobileDevice)
-    {
-        <script>
-            //$('.flexslider').flexslider({
-            //    animation: "slide",
-            //    controlNav: "thumbnails"
-            //});
-            $(".group1").colorbox({ rel: 'group1', height: "100%" });
-        </script>
+    else {
+        $(".group1").colorbox({ rel: 'group1', height: "100%" });
     }
-}
-
+</script>
