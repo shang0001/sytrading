@@ -117,6 +117,7 @@ namespace SYTrading.Controllers
 
                 // Very costly! 
                 // But have to clear cache for all gloves because the related gloves list in Glove's detail page might include this new entry.
+                TempData.Remove("ClearCache");
                 TempData.Add("ClearCache", ClearCacheController.ClearCache("Glove", null, null));
 
                 return RedirectToAction("Index");
@@ -245,6 +246,7 @@ namespace SYTrading.Controllers
                 db.Entry(gloveViewData.Glove).State = EntityState.Modified;
                 db.SaveChanges();
 
+                TempData.Remove("ClearCache");
                 TempData.Add("ClearCache", ClearCacheController.ClearCache("Glove", gloveViewData.Glove.GloveID, null));
 
                 return RedirectToAction("Index");
@@ -295,6 +297,7 @@ namespace SYTrading.Controllers
             db.Gloves.Remove(glove);
             db.SaveChanges();
 
+            TempData.Remove("ClearCache");
             TempData.Add("ClearCache", ClearCacheController.ClearCache("Glove", null, null));
 
             return RedirectToAction("Index");
@@ -345,6 +348,7 @@ namespace SYTrading.Controllers
             }
             db.SaveChanges();
 
+            TempData.Remove("ClearCache");
             TempData.Add("ClearCache", ClearCacheController.ClearCache("Glove", null, null));
 
             return RedirectToAction("Index");
@@ -367,6 +371,7 @@ namespace SYTrading.Controllers
 
         public ActionResult ClearCache()
         {
+            TempData.Remove("ClearCache");
             TempData.Add("ClearCache", ClearCacheController.ClearCache("Glove", null, null));
             return RedirectToAction("Index");
         }

@@ -16,12 +16,10 @@
             <div class="content-wrapper">
                 <div class="float-left">
                     <p class="site-title">@Html.ActionLink("your logo here", "Index", "Home")
-                                @if (HttpContext.Current.IsDebuggingEnabled) {
-                                    if (TempData.ContainsKey("ClearCache"))
+                                    @if (TempData.ContainsKey("ClearCache"))
                                     {
                                         <br />@TempData["ClearCache"];
                                     }
-                                }
                     </p>
                 </div>
                 <div class="float-right">
