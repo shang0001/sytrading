@@ -36,6 +36,8 @@ namespace SYTrading.Controllers
             StringBuilder result = new StringBuilder();
             result.AppendLine(ClearCacheController.ClearCache("Home", null, null));
             result.AppendLine(ClearCacheController.ClearCache("Glove", null, null));
+
+            TempData.Remove("ClearCache");
             TempData.Add("ClearCache", result);
 
             return RedirectToAction("Index");

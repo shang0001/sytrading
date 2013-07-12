@@ -55,6 +55,7 @@ namespace SYTrading.Controllers
                 db.Applications.Add(application);
                 db.SaveChanges();
 
+                TempData.Remove("ClearCache");
                 TempData.Add("ClearCache", ClearCacheController.ClearCache("Glove", null, null));
 
                 return RedirectToAction("Index");
@@ -88,6 +89,7 @@ namespace SYTrading.Controllers
                 db.Entry(application).State = EntityState.Modified;
                 db.SaveChanges();
 
+                TempData.Remove("ClearCache");
                 TempData.Add("ClearCache", ClearCacheController.ClearCache("Glove", null, null));
 
                 return RedirectToAction("Index");
@@ -119,6 +121,7 @@ namespace SYTrading.Controllers
             db.Applications.Remove(application);
             db.SaveChanges();
 
+            TempData.Remove("ClearCache");
             TempData.Add("ClearCache", ClearCacheController.ClearCache("Glove", null, null));
 
             return RedirectToAction("Index");
