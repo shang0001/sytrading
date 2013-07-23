@@ -1,12 +1,12 @@
 ﻿@model SYTradingPublicSite.ViewModels.GloveViewModel
-<div class="well sidebar-nav">
-    <div class="accordion" id="accordion1">
+<div class="well sidebar-nav" id="pageslide_container">
+@*    <div class="accordion" id="accordion1">
         <div class="accordion-group">
             <div class="accordion-heading">
                 <a class="accordion-toggle nav-header" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">Browse by Applications
                 </a>
             </div>
-            <div id="collapseOne" class="accordion-body collapse out">
+            <div id="collapseOne" class="accordion-body collapse in">
                 <div class="accordion-inner">
                     <ul class="nav nav-list">
                         @foreach (var item in Model.ApplicationCategories)
@@ -23,7 +23,7 @@
                 <a class="accordion-toggle nav-header" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">Browse by Materials
                 </a>
             </div>
-            <div id="collapseTwo" class="accordion-body collapse out">
+            <div id="collapseTwo" class="accordion-body collapse in">
                 <div class="accordion-inner">
                     <ul class="nav nav-list">
                         @foreach (var item in Model.Materials)
@@ -35,14 +35,25 @@
                 </div>
             </div>
         </div>
+    </div>*@
+    <div id="pageslide_openbar" class="visible-phone">
+        <img src="~/Images/arrow_left.png" />
     </div>
-    <p class="hidden-phone"></p>
+    <div id="pageslide">
+        <ul class="nav nav-list">
+            <li class="nav-header">Browse by Applications</li>
+                @foreach (var item in Model.ApplicationCategories)
+                {
+                    string strCSSClass = item == Model.selectedApplicationCategory ? "active" : null;
+                    <li class="@strCSSClass">@Html.ActionLink(item, "Index", new { selectedApplicationCategory = item })</li>
+                }
+            <li class="nav-header">Browse by Materials</li>
+                @foreach (var item in Model.Materials)
+                {
+                    string strCSSClass = item.MaterialID == Model.selectedMaterialID ? "active" : null;
+                    <li class="@strCSSClass">@Html.ActionLink(item.Name, "Index", new { materialID = item.MaterialID })</li>
+                }
+        </ul>
+        <a class="btn btn-info visible-phone" href="javascript:$.pageslide.close()">Close</a>
+    </div>
 </div>
-
-<script>
-    if ($('p[class="hidden-phone"]').css("display") != "none") {
-        //alert('dada');
-        // Expand sidebar navigation for Desktop and Pad
-        $('.collapse').collapse('show');
-    }
-</script>

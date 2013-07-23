@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
     <title>@ViewBag.Title 
         @if (HttpContext.Current.IsDebuggingEnabled) {
             @DateTime.Now.ToLongTimeString()
@@ -9,12 +10,7 @@
     </title>
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <meta name="viewport" content="width=device-width" />
-    @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/pluginsCss")
-
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/pluginsJS")
-
     @Styles.Render("~/Content/css")
 
 @*    <!-- Fav and touch icons -->
@@ -25,7 +21,7 @@
     <link rel="shortcut icon" href="../assets/ico/favicon.png">*@
 </head>
 <body>
-
+    <p class="hidden-phone"></p>
     <!-- Part 1: Wrap all page content here -->
     <div id="wrap">
 
@@ -93,5 +89,19 @@
     </div>
 
     @RenderSection("scripts", required: false)
+    
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/pluginsJS")
+    <script>
+        // When ready...
+        window.addEventListener("load", function () {
+            // Set a timeout...
+            setTimeout(function () {
+                // Hide the address bar!
+                window.scrollTo(0, 1);
+            }, 0);
+        });
+    </script>
 </body>
 </html>

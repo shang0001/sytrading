@@ -26,7 +26,11 @@ namespace SYTradingPublicSite
             bundles.Add(new ScriptBundle("~/pluginsJS").Include(
                         "~/bootstrap/js/bootstrap.js",
                         "~/FlexSlider2/jquery.flexslider.js",
-                        "~/colorbox-ex5/jquery.colorbox.js"));
+                        "~/colorbox-ex5/jquery.colorbox.js",
+                        "~/swipepanel/jquery.event.move.js",
+                        "~/swipepanel/jquery.event.swipe.js",
+                        "~/swipepanel/jquery.pageslide.js",
+                        "~/Scripts/Glove.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
 
@@ -48,7 +52,8 @@ namespace SYTradingPublicSite
                 "~/bootstrap/css/bootstrap.css",
                 "~/bootstrap/css/bootstrap-responsive.css",
                 "~/FlexSlider2/flexslider.css",
-                "~/colorbox-ex5/colorbox.css"));
+                "~/colorbox-ex5/colorbox.css",
+                "~/swipepanel/jquery.pageslide.css"));
         }
     }
 }
