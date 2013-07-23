@@ -243,6 +243,10 @@
     <Content Include="bootstrap\css\bootstrap.min.css" />
     <Content Include="bootstrap\js\bootstrap.js" />
     <Content Include="bootstrap\js\bootstrap.min.js" />
+    <Content Include="Images\arrow_left.png" />
+    <Content Include="Scripts\Glove.js" />
+    <Content Include="swipepanel\jquery.event.move.js" />
+    <Content Include="swipepanel\jquery.event.swipe.js" />
     <Content Include="colorbox-ex5\colorbox.css" />
     <Content Include="colorbox-ex5\jquery.colorbox.js" />
     <Content Include="Content\Copy of Site.css" />
@@ -328,6 +332,7 @@
     <Content Include="Images\contact-us.png" />
     <Content Include="Images\contact.png" />
     <Content Include="Images\controls.png" />
+    <Content Include="Images\Gloves.png" />
     <Content Include="Images\glyphicons-halflings-white.png" />
     <Content Include="Images\glyphicons-halflings.png" />
     <Content Include="Images\loading.gif" />
@@ -362,6 +367,8 @@
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="swipepanel\jquery.pageslide.css" />
+    <Content Include="swipepanel\jquery.pageslide.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -393,9 +400,6 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Glove\Index.cshtml" />
     <Content Include="Views\Glove\Details.cshtml" />
-    <Content Include="Views\Glove\Create.cshtml" />
-    <Content Include="Views\Glove\Edit.cshtml" />
-    <Content Include="Views\Glove\Delete.cshtml" />
     <Content Include="Views\Glove\SidebarNav.cshtml" />
   </ItemGroup>
   <ItemGroup>

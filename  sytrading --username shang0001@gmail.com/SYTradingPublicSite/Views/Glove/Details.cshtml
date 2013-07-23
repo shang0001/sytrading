@@ -4,7 +4,7 @@
     ViewBag.Title = "Details";
 }
 
-<div class="container-fluid detail-page">
+<div class="container-fluid detail-page GlovePage">
     <div class="row-fluid">
         <div class="span3">
             @Html.Partial("SidebarNav")
@@ -135,7 +135,7 @@
                                     {
                                         <a href="@Url.Action("Details", new { id = glove.GloveID, selectedApplicationCategory=Model.selectedApplicationCategory, selectedMaterialID=Model.selectedMaterialID })">
                                             <img src="@glove.ImagePaths.First().Path?thumbnail=true" class="img-polaroid" />
-                                            <h5>@glove.ItemNo</h5>
+                                            <h6>@glove.ItemNo</h6>
                                         </a>
                                     }
                                 @: </div>
@@ -159,14 +159,3 @@
     <!--/row-->
 </div>
 <!--/.fluid-container-->
-
-<script>
-    if ($('br[class="hidden-phone"]').css("display") == "none") {
-        $('.show-grid [class*="span"]').click(function () {
-            location.href = $("a", this).attr("href");
-        });
-    }
-    else {
-        $(".group1").colorbox({ rel: 'group1', height: "100%" });
-    }
-</script>

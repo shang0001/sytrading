@@ -4,7 +4,7 @@
     ViewBag.Title = "Gloves";
 }
 
-<div class="container-fluid">
+<div class="container-fluid GlovePage">
     <div class="row-fluid">
         <div class="span3">
             @Html.Partial("SidebarNav")
@@ -16,6 +16,15 @@
                 <p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
                 <p><a href="#" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
             <div>*@
+            @if (!string.IsNullOrEmpty(Model.selectedApplicationCategory))
+            {
+                <h3>Gloves for @Model.selectedApplicationCategory</h3>
+            }
+            @if (Model.Materials.Where(c => c.MaterialID == Model.selectedMaterialID).Count() == 1)
+            {
+                <h3>@Model.Materials.Where(c => c.MaterialID == Model.selectedMaterialID).Single().Name Gloves</h3>
+            } 
+
             @for (int i = 0; i < Model.Gloves.Count; i++)
             {
                 SYTradingPublicSite.Models.Glove glove = Model.Gloves[i];
@@ -46,11 +55,3 @@
     <!--/row-->
 </div>
 <!--/.fluid-container-->
-
-<script>
-    if ($('span[class="hidden-phone"]').css("display") == "none") {
-        $('.show-grid [class*="span"]').click(function () {
-            location.href = $("a", this).attr("href");
-        });
-    }
-</script>
