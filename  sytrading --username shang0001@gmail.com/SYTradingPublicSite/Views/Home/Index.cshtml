@@ -2,14 +2,14 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="container">
+<div class="container home-page">
 @*    <!-- Main hero unit for a primary marketing message or call to action -->
     <div class="hero-unit">
     </div>*@
 
     <!-- Example row of columns -->
     <div class="row home-icons">
-        <div class="span7">
+        <div class="span12">
             <div class="flexslider">
                 <ul class="slides">
                     @foreach (string filename in ViewBag.BannerImages)
@@ -21,13 +21,23 @@
                 </ul>
             </div>
         </div>
-        <div class="span5">
+    </div>
+    <div class="row-fluid">
+        <div class="span8">
+            Branding text here!
+        </div>
+        <div class="span4">
+            <div style="display: inline-block">
             <h2>Gloves</h2>
             <p><a href="@Url.Action("Index", "Glove")">
                 <img class="home-icon" src="~/Images/Gloves.png" /></a></p>
+            </div>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <div style="display: inline-block">
             <h2>Contact Us</h2>
             <p><a href="@Url.Action("Contact", "Home")">
                 <img class="home-icon" src="~/Images/contact-us.png" /></a></p>
+            </div>
         </div>
     </div>
 </div>

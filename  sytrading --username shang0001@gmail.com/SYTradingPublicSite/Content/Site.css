@@ -50,12 +50,16 @@ form {
     padding: 30px 30px 1px 30px;
 }
 
-.home-icons div {
+.home-page .span2 {
     text-align: center;
 }
 
-.home-icon {
+.home-page .home-icon {
     height: 128px;
+}
+
+.home-page .home-icons div {
+    text-align: center;
 }
 
 #footer {
@@ -100,6 +104,15 @@ form {
         width: 100%;
     }
 
+        .detail-page .span9 .span4 li:not(:first-child) {
+            display: inline-block;
+        }
+
+            .detail-page .span9 .span4 li:not(:first-child) img {
+                max-width: 150px;
+                max-height: 150px;
+            }
+
     .detail-page .span9 .span8 {
         float: none;
         width: 100%;
@@ -115,6 +128,7 @@ form {
     padding: 9px 0px;
     position: fixed;
     width: inherit;
+    *width : 23%; /* IE7 and below */  
 }
 
     .sidebar-nav .accordion {
@@ -162,14 +176,6 @@ form {
 .display-field {
 }
 
-/*.detail-page > .row-fluid > .span3 {
-     position: fixed;
-}*/
-
-/*.detail-page > .row-fluid > .span9 {
-     margin-left: 25%;
-}*/
-
 .detail-page ul {
     list-style: none;
 }
@@ -199,24 +205,22 @@ form {
 }
 
 .detail-table .span4andhalf {
-    /*Should be calculated 37.5%, but round to 37% to be compatible with IE 7*/
-    width: 37%;
-    *width: 37%;
+    /*Should be calculated 37.5%, but decrease to 36% to be compatible with IE 7*/
+    width: 37.5%;
+    *width: 36%; /* IE7 and below */ 
 }
 
-.detail-table [class*="span"]:not(:last-child) {
+.detail-table [class*="span"]:first-child {
+    /* Because :not and :last-child is not valid in IE8 and below, 
+        so changed to use :first-child to apply the left border for all browsers*/ 
     border-left: solid 1px black;
-    border-bottom: solid 1px black;
-    border-top: solid 1px black;
-}
-
-.detail-table [class*="span"]:last-child {
-    border: solid 1px black;
 }
 
 .detail-table [class*="span"] {
-    /*:not(:first-child)*/
     margin-left: 0px;
+    border-top: solid 1px black;
+    border-bottom: solid 1px black;
+    border-right: solid 1px black;
 }
 
     .detail-table [class*="span"] div {
@@ -226,7 +230,7 @@ form {
         .detail-table [class*="span"] div:first-child {
             border-bottom: solid 1px black;
             text-align: center;
-            background-color: #f0db99;
+            background-color: #ECB88E;
             background-image: -moz-linear-gradient(top, #ffffff, #CCCCCC);
             background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#CCCCCC));
             background-image: -webkit-linear-gradient(top, #ffffff, #CCCCCC);
@@ -270,6 +274,22 @@ form {
             min-height: inherit;
         }
 
+    .home-page .row-fluid .span4 {
+        text-align: center;
+    }
+
+        .home-page .row-fluid .span4 div {
+            display: inline-block;
+        }
+
+        .home-page .row-fluid .span4 h2 {
+            font-size: 26px;
+        }
+
+        .home-page .row-fluid .span4 img {
+            height: 64px;
+        }
+
     .hero-unit {
         padding: 0px;
     }
@@ -285,11 +305,16 @@ form {
         width: 100%;
     }
 
+    .GlovePage > .row-fluid > .span3 {
+        min-height: inherit;
+    }
+
     .show-grid {
         margin-top: 0px;
         margin-bottom: 0px;
         margin-left: -20px;
-        width: 110%;
+        margin-right: -20px;
+        width: initial;
     }
 
         .show-grid [class*="span"] {
@@ -300,6 +325,11 @@ form {
             background-color: #E0E0EB;
             /*margin-left: 20px !important;*/
             clear: both;
+            float: left;
+            border-bottom: solid 1px;
+            -webkit-border-radius: 0px;
+            -moz-border-radius: 0px;
+            border-radius: 0px;
         }
 
             .show-grid [class*="span"]:hover {
@@ -331,7 +361,7 @@ form {
                 font-size: 20px;
             }
 
-            .show-grid [class*="span"] p:last-child a {
+            /*.show-grid [class*="span"] p:last-child a {
                 float: right;
                 margin: 1.1em 0;
                 font-size: 25px;
@@ -340,11 +370,7 @@ form {
                 -webkit-border-radius: 700px;
                 -moz-border-radius: 700px;
                 border-radius: 700px;
-            }
-
-    .detail-page > .row-fluid > .span3 {
-        position: inherit;
-    }
+            }*/
 
     .detail-page > .row-fluid > .span9 {
         margin-left: auto;
