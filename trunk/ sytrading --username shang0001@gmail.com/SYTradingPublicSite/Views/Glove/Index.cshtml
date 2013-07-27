@@ -11,11 +11,6 @@
         </div>
         <!--/span-->
         <div class="span9">
-@*            <div class="hero-unit">
-                <h1>Hello, world!</h1>
-                <p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-                <p><a href="#" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
-            <div>*@
             @if (!string.IsNullOrEmpty(Model.selectedApplicationCategory))
             {
                 <h3>Gloves for @Model.selectedApplicationCategory</h3>
@@ -24,6 +19,11 @@
             {
                 <h3>@Model.Materials.Where(c => c.MaterialID == Model.selectedMaterialID).Single().Name Gloves</h3>
             } 
+
+            @if (Model.Gloves.Count == 0)
+            {
+                <h4>Sorry! There is no glove for this category at this moment.</h4>
+            }
 
             @for (int i = 0; i < Model.Gloves.Count; i++)
             {
@@ -41,7 +41,7 @@
                             <h4>@glove.ItemNo</h4>
                             <h4 class="hidden-phone">@glove.Name</h4>
                             <p class="hidden-phone">@glove.Description</p>
-                            <p><a class="btn" href="@Url.Action("Details", new { id=glove.GloveID, selectedApplicationCategory=Model.selectedApplicationCategory, selectedMaterialID=Model.selectedMaterialID })"><span class="hidden-phone">View details</span> &raquo;</a></p>
+                            <p class="hidden-phone"><a class="btn" href="@Url.Action("Details", new { id=glove.GloveID, selectedApplicationCategory=Model.selectedApplicationCategory, selectedMaterialID=Model.selectedMaterialID })"><span>View details</span> &raquo;</a></p>
                         @: </div>
 
                             if ((i + 1) % 3 == 0 || i + 1 == Model.Gloves.Count)
