@@ -245,6 +245,14 @@
     <Content Include="bootstrap\js\bootstrap.min.js" />
     <Content Include="Images\arrow-up.png" />
     <Content Include="Images\arrow_left.png" />
+    <Content Include="Images\banner\Home\10.jpg" />
+    <Content Include="Images\banner\Home\11.jpg" />
+    <Content Include="Images\banner\Home\12.jpg" />
+    <Content Include="Images\banner\Home\13.jpg" />
+    <Content Include="Images\banner\Home\14.jpg" />
+    <Content Include="Images\banner\Home\15.jpg" />
+    <Content Include="Images\banner\Home\16.jpg" />
+    <Content Include="Images\banner\Home\17.jpg" />
     <Content Include="Scripts\Glove.js" />
     <Content Include="swipepanel\jquery.event.move.js" />
     <Content Include="swipepanel\jquery.event.swipe.js" />
